@@ -9,7 +9,12 @@
   <meta name="keywords" content="Türk Yıldızı Birliği, Türk tarihi, Türk dili, teknoloji, gençlik projeleri, millî değerler" />
   <meta name="author" content="Türk Yıldızı Birliği" />
 
+  <!-- Tailwind CSS -->
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+  <!-- Orbitron Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="styles.css" />
   
   <style>
@@ -24,6 +29,20 @@
     footer {
       font-size: 0.9rem;
       letter-spacing: 0.05em;
+    }
+
+    /* Türk Yıldızı Birliği başlığı için Orbitron ve özel efekt */
+    h1.turk-yildizi {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 4rem; /* Daha büyük ve dikkat çekici */
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #d71a21; /* Türk bayrağı kırmızısı */
+      text-shadow:
+        0 0 8px #d71a21,
+        0 0 15px #ff4d4d;
+      margin-bottom: 1rem;
     }
   </style>
 </head>
@@ -52,13 +71,12 @@
 
   <main class="container mx-auto px-6 py-12">
     <section class="text-center max-w-4xl mx-auto mb-16">
-      <h1 class="text-5xl font-extrabold mb-4 leading-tight text-red-700 drop-shadow-md">
+      <h1 class="turk-yildizi">
         Türk Yıldızı Birliği
       </h1>
       <p class="text-xl text-gray-700 mb-8">
-        “Kim olduğunu bilen, geleceğini şekillendirir.”
-
-Ecdadın mirasıyla dolu bir enerjiye sahip, hedefi yıldızlara uzanan bir roket gibi yola çıktık. Milli şuurumuzu koruyarak; tarihimize ve dilimize, geleceğin evrenine kodlanacak ebedi bir değer olarak sahip çıkacağız. 
+        “Kim olduğunu bilen, geleceğini şekillendirir.”<br><br>
+        Ecdadın mirasıyla dolu bir enerjiye sahip, hedefi yıldızlara uzanan bir roket gibi yola çıktık. Milli şuurumuzu koruyarak; tarihimize ve dilimize, geleceğin evrenine kodlanacak ebedi bir değer olarak sahip çıkacağız. 
       </p>
       <a href="about.html" class="inline-block bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 text-white font-semibold px-6 py-3 rounded-md transition">
         Daha Fazla Bilgi Edinin
@@ -88,7 +106,7 @@ Ecdadın mirasıyla dolu bir enerjiye sahip, hedefi yıldızlara uzanan bir roke
 
   <footer class="bg-red-700 text-white py-6 text-center tracking-wide">
     <p>&copy; 2025 Türk Yıldızı Birliği. Tüm hakları saklıdır.</p>
-    <p class="mt-2 text-sm text-red-200">İtici gücümüz tarihimiz ,rotamız yıldızlardır...</p>
+    <p class="mt-2 text-sm text-red-200">İtici gücümüz tarihimiz, rotamız yıldızlardır...</p>
   </footer>
 
 </body>
