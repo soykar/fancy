@@ -83,7 +83,17 @@
     <span class="line block h-1 w-full bg-white rounded transition-transform duration-300 origin-center"></span>
   </div>
       </button>
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const menu = document.getElementById('menu');
 
+  menuBtn.addEventListener('click', () => {
+    const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+    menuBtn.setAttribute('aria-expanded', !isExpanded);
+    menu.classList.toggle('hidden');
+    menuBtn.classList.toggle('open');
+  });
+</script>
       <!-- Menü -->
       <nav id="menu" class="hidden w-full md:flex md:w-auto" aria-label="Ana navigasyon">
         <ul class="flex flex-col md:flex-row md:space-x-6 text-lg font-medium mt-4 md:mt-0">
