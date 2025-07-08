@@ -75,10 +75,13 @@
       </a>
 
       <!-- Hamburger Buton -->
-      <button id="menu-btn" class="block md:hidden focus:outline-none" aria-label="Menüyü aç/kapa" aria-expanded="false" aria-controls="menu">
-        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path>
-        </svg>
+      <button id="menu-btn" class="block md:hidden focus:outline-none transition-transform duration-300" aria-label="Menüyü aç/kapa" aria-expanded="false" aria-controls="menu">
+        <span class="sr-only">Menüyü aç/kapa</span>
+  <div class="hamburger-lines relative w-8 h-8 flex flex-col justify-between">
+    <span class="line block h-1 w-full bg-white rounded transition-transform duration-300 origin-center"></span>
+    <span class="line block h-1 w-full bg-white rounded transition-opacity duration-300"></span>
+    <span class="line block h-1 w-full bg-white rounded transition-transform duration-300 origin-center"></span>
+  </div>
       </button>
 
       <!-- Menü -->
