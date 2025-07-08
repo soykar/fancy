@@ -15,8 +15,6 @@
   <!-- Orbitron Font -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css" />
-  
   <style>
     /* Minimal ekstra stiller */
     .nav-link {
@@ -44,7 +42,6 @@
       margin-bottom: 1rem;
       font-size: 2.5rem;
     }
-
     @media (min-width: 640px) {
       h1.turk-yildizi {
         font-size: 3.5rem;
@@ -76,18 +73,27 @@
       <a href="index.html" class="text-3xl font-extrabold tracking-widest hover:text-gray-300" aria-label="Ana Sayfa">
         TÜRK YILDIZI BİRLİĞİ
       </a>
-      <nav aria-label="Ana navigasyon" class="mt-2 md:mt-0">
-  <ul class="flex flex-col md:flex-row md:space-x-6 text-lg font-medium">
-    <li><a href="index.html" class="nav-link focus:ring-2 focus:ring-white">Ana Sayfa</a></li>
-    <li><a href="about.html" class="nav-link focus:ring-2 focus:ring-white">Hakkımızda</a></li>
-    <li><a href="projects.html" class="nav-link focus:ring-2 focus:ring-white">Projeler</a></li>
-    <li><a href="history.html" class="nav-link focus:ring-2 focus:ring-white">Türk Tarihi</a></li>
-    <li><a href="language.html" class="nav-link focus:ring-2 focus:ring-white">Türk Dili</a></li>
-    <li><a href="technology.html" class="nav-link focus:ring-2 focus:ring-white">Teknoloji</a></li>
-    <li><a href="apply.html" class="nav-link focus:ring-2 focus:ring-white">Üye Başvuru</a></li>
-    <li><a href="contact.html" class="nav-link focus:ring-2 focus:ring-white">İletişim</a></li>
-  </ul>
-</nav>
+
+      <!-- Hamburger Buton -->
+      <button id="menu-btn" class="block md:hidden focus:outline-none" aria-label="Menüyü aç/kapa" aria-expanded="false" aria-controls="menu">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"  xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path>
+        </svg>
+      </button>
+
+      <!-- Menü -->
+      <nav id="menu" class="hidden w-full md:flex md:w-auto" aria-label="Ana navigasyon">
+        <ul class="flex flex-col md:flex-row md:space-x-6 text-lg font-medium mt-4 md:mt-0">
+          <li><a href="index.html" class="nav-link block py-2 px-3 hover:text-gray-300 focus:ring-2 focus:ring-white">Ana Sayfa</a></li>
+          <li><a href="about.html" class="nav-link block py-2 px-3 hover:text-gray-300 focus:ring-2 focus:ring-white">Hakkımızda</a></li>
+          <li><a href="projects.html" class="nav-link block py-2 px-3 hover:text-gray-300 focus:ring-2 focus:ring-white">Projeler</a></li>
+          <li><a href="history.html" class="nav-link block py-2 px-3 hover:text-gray-300 focus:ring-2 focus:ring-white">Türk Tarihi</a></li>
+          <li><a href="language.html" class="nav-link block py-2 px-3 hover:text-gray-300 focus:ring-2 focus:ring-white">Türk Dili</a></li>
+          <li><a href="technology.html" class="nav-link block py-2 px-3 hover:text-gray-300 focus:ring-2 focus:ring-white">Teknoloji</a></li>
+          <li><a href="apply.html" class="nav-link block py-2 px-3 hover:text-gray-300 focus:ring-2 focus:ring-white">Üye Başvuru</a></li>
+          <li><a href="contact.html" class="nav-link block py-2 px-3 hover:text-gray-300 focus:ring-2 focus:ring-white">İletişim</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
@@ -136,6 +142,17 @@
     <p>&copy; 2025 Türk Yıldızı Birliği. Tüm hakları saklıdır.</p>
     <p class="mt-2 text-sm text-red-200">İtici gücümüz tarihimiz, rotamız yıldızlardır...</p>
   </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+
+    menuBtn.addEventListener('click', () => {
+      const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', !isExpanded);
+      menu.classList.toggle('hidden');
+    });
+  </script>
 
 </body>
 </html>
