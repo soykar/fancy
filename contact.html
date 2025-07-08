@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İletişim - Türk Yıldızı Birliği</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white text-gray-800">
+    <header class="bg-red-600 text-white p-5">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-3xl font-bold">Türk Yıldızı Birliği</h1>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="index.html" class="hover:underline">Ana Sayfa</a></li>
+                    <li><a href="about.html" class="hover:underline">Hakkımızda</a></li>
+                    <li><a href="projects.html" class="hover:underline">Projeler</a></li>
+                    <li><a href="contact.html" class="hover:underline">İletişim</a></li>
+                    <li><a href="apply.html" class="hover:underline">Üye Başvuru</a></li>
+                    <li><a href="history.html" class="hover:underline">Türk Tarihi</a></li>
+                    <li><a href="language.html" class="hover:underline">Türk Dili</a></li>
+                    <li><a href="technology.html" class="hover:underline">Teknoloji</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-5">
+        <section class="text-center my-10">
+            <h2 class="text-4xl font-bold mb-4">İletişim</h2>
+            <p class="text-lg mb-6">Bizimle iletişime geçmek için aşağıdaki formu doldurunuz.</p>
+            <form class="bg-gray-100 p-5 rounded-lg">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700">Ad Soyad</label>
+                    <input type="text" id="name" class="w-full p-2 border rounded">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700">E-Posta</label>
+                    <input type="email" id="email" class="w-full p-2 border rounded">
+                </div>
+                <div class="mb-4">
+                    <label for="message" class="block text-gray-700">Mesajınız</label>
+                    <textarea id="message" class="w-full p-2 border rounded"></textarea>
+                </div>
+                <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded">Gönder</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="bg-red-600 text-white text-center p-5">
+        <p>&copy; 2023 Türk Yıldızı Birliği. Tüm hakları saklıdır.</p>
+    </footer>
+</body>
+</html>
