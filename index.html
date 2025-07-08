@@ -1,59 +1,93 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Türk Yıldızı Birliği</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Türk Yıldızı Birliği | Dijital Çağın Rotasını Biz Çiziyoruz</title>
+  
+  <meta name="description" content="Türk Yıldızı Birliği, millî değerleri yaşatan, tarih, dil ve teknoloji alanlarında gençlere rehberlik eden güçlü bir topluluktur." />
+  <meta name="keywords" content="Türk Yıldızı Birliği, Türk tarihi, Türk dili, teknoloji, gençlik projeleri, millî değerler" />
+  <meta name="author" content="Türk Yıldızı Birliği" />
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  
+  <style>
+    /* Minimal ekstra stiller */
+    .nav-link {
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover, .nav-link:focus {
+      color: #b91c1c; /* koyu kırmızı hover */
+      outline: none;
+    }
+    footer {
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+  </style>
 </head>
-<body class="bg-white text-gray-800">
-    <header class="bg-red-600 text-white p-5">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-3xl font-bold">Türk Yıldızı Birliği</h1>
-            <nav>
-                <ul class="flex space-x-4">
-                    <li><a href="index.html" class="hover:underline">Ana Sayfa</a></li>
-                    <li><a href="about.html" class="hover:underline">Hakkımızda</a></li>
-                    <li><a href="projects.html" class="hover:underline">Projeler</a></li>
-                    <li><a href="contact.html" class="hover:underline">İletişim</a></li>
-                    <li><a href="apply.html" class="hover:underline">Üye Başvuru</a></li>
-                    <li><a href="history.html" class="hover:underline">Türk Tarihi</a></li>
-                    <li><a href="language.html" class="hover:underline">Türk Dili</a></li>
-                    <li><a href="technology.html" class="hover:underline">Teknoloji</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <main class="container mx-auto p-5">
-        <section class="text-center my-10">
-            <h2 class="text-4xl font-bold mb-4">Türk Yıldızı Birliği'ne Hoş Geldiniz!</h2>
-            <p class="text-lg mb-6">Millî değerlerimizi yaşatmak ve geleceğe taşımak için buradayız.</p>
-            <a href="about.html" class="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700">Daha Fazla Bilgi</a>
-        </section>
+<body class="bg-white text-gray-900 font-sans leading-relaxed">
 
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-red-100 p-5 rounded-lg shadow-md">
-                <h3 class="text-xl font-bold">Misyonumuz</h3>
-                <p>Türk tarihini ve dilini yaşatmak, gençlerimizi bilinçli bireyler olarak yetiştirmek.</p>
-                <a href="mission.html" class="text-red-600 hover:underline">Devamını Oku</a>
-            </div>
-            <div class="bg-red-100 p-5 rounded-lg shadow-md">
-                <h3 class="text-xl font-bold">Vizyonumuz</h3>
-                <p>Geleceğe umutla bakan bir toplum inşa etmek.</p>
-                <a href="vision.html" class="text-red-600 hover:underline">Devamını Oku</a>
-            </div>
-            <div class="bg-red-100 p-5 rounded-lg shadow-md">
-                <h3 class="text-xl font-bold">Projelerimiz</h3>
-                <p>Gençlerimize yönelik çeşitli projeler ve etkinlikler düzenliyoruz.</p>
-                <a href="projects.html" class="text-red-600 hover:underline">Devamını Oku</a>
-            </div>
-        </section>
-    </main>
+  <header class="bg-red-700 text-white shadow-md">
+    <div class="container mx-auto flex flex-wrap items-center justify-between p-4">
+      <a href="index.html" class="text-3xl font-extrabold tracking-widest hover:text-gray-300" aria-label="Ana Sayfa">
+        TÜRK YILDIZI BİRLİĞİ
+      </a>
+      <nav aria-label="Ana navigasyon" class="mt-2 md:mt-0">
+        <ul class="flex flex-wrap space-x-6 text-lg font-medium">
+          <li><a href="index.html" class="nav-link focus:ring-2 focus:ring-white">Ana Sayfa</a></li>
+          <li><a href="about.html" class="nav-link focus:ring-2 focus:ring-white">Hakkımızda</a></li>
+          <li><a href="projects.html" class="nav-link focus:ring-2 focus:ring-white">Projeler</a></li>
+          <li><a href="history.html" class="nav-link focus:ring-2 focus:ring-white">Türk Tarihi</a></li>
+          <li><a href="language.html" class="nav-link focus:ring-2 focus:ring-white">Türk Dili</a></li>
+          <li><a href="technology.html" class="nav-link focus:ring-2 focus:ring-white">Teknoloji</a></li>
+          <li><a href="apply.html" class="nav-link focus:ring-2 focus:ring-white">Üye Başvuru</a></li>
+          <li><a href="contact.html" class="nav-link focus:ring-2 focus:ring-white">İletişim</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <footer class="bg-red-600 text-white text-center p-5">
-        <p>&copy; 2023 Türk Yıldızı Birliği. Tüm hakları saklıdır.</p>
-    </footer>
+  <main class="container mx-auto px-6 py-12">
+    <section class="text-center max-w-4xl mx-auto mb-16">
+      <h1 class="text-5xl font-extrabold mb-4 leading-tight text-red-700 drop-shadow-md">
+        Türk Yıldızı Birliği'ne Hoş Geldiniz
+      </h1>
+      <p class="text-xl text-gray-700 mb-8">
+        Millî değerlerimizi yaşatmak, Türk tarihini, dilini ve teknolojiyi gelecek nesillere güçlü şekilde aktarmak için bir aradayız.
+      </p>
+      <a href="about.html" class="inline-block bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 text-white font-semibold px-6 py-3 rounded-md transition">
+        Daha Fazla Bilgi Edinin
+      </a>
+    </section>
+
+    <section aria-label="Misyon, Vizyon ve Projelerimiz" class="grid gap-8 md:grid-cols-3">
+      <article class="bg-red-50 border border-red-200 rounded-lg shadow-sm p-6 hover:shadow-lg transition">
+        <h2 class="text-2xl font-semibold mb-3 text-red-700">Misyonumuz</h2>
+        <p class="text-gray-800 mb-4">Türk tarihini ve dilini yaşatmak, gençlerimizi bilinçli ve donanımlı bireyler olarak yetiştirmek.</p>
+        <a href="mission.html" class="text-red-600 font-medium hover:underline" aria-label="Misyonumuz hakkında daha fazla bilgi">Devamını Oku →</a>
+      </article>
+
+      <article class="bg-red-50 border border-red-200 rounded-lg shadow-sm p-6 hover:shadow-lg transition">
+        <h2 class="text-2xl font-semibold mb-3 text-red-700">Vizyonumuz</h2>
+        <p class="text-gray-800 mb-4">Geleceğe umutla bakan, teknoloji ve kültürü harmanlayan güçlü bir toplum inşa etmek.</p>
+        <a href="vision.html" class="text-red-600 font-medium hover:underline" aria-label="Vizyonumuz hakkında daha fazla bilgi">Devamını Oku →</a>
+      </article>
+
+      <article class="bg-red-50 border border-red-200 rounded-lg shadow-sm p-6 hover:shadow-lg transition">
+        <h2 class="text-2xl font-semibold mb-3 text-red-700">Projelerimiz</h2>
+        <p class="text-gray-800 mb-4">Gençlerimize yönelik kültür, teknoloji ve eğitim odaklı çeşitli projeler ve etkinlikler düzenliyoruz.</p>
+        <a href="projects.html" class="text-red-600 font-medium hover:underline" aria-label="Projelerimiz hakkında daha fazla bilgi">Devamını Oku →</a>
+      </article>
+    </section>
+  </main>
+
+  <footer class="bg-red-700 text-white py-6 text-center tracking-wide">
+    <p>&copy; 2023 Türk Yıldızı Birliği. Tüm hakları saklıdır.</p>
+    <p class="mt-2 text-sm text-red-200">Dijital çağın rotasını biz çiziyoruz.</p>
+  </footer>
+
 </body>
 </html>
