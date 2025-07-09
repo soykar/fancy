@@ -1,13 +1,174 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Türk Tarihi - Türk Yıldızı Birliği</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Türk Tarihi - Türk Yıldızı Birliği</title>
+  <meta name="description" content="Türk Yıldızı Birliği'nin Türk tarihi ile ilgili sayfası. Milli kültür ve tarih bilinci." />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+  
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-20GZGHYC3T"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-20GZGHYC3T');
+  </script>
+
+  <style>
+    .nav-link {
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover, .nav-link:focus {
+      color: #b91c1c;
+      outline: none;
+    }
+    h1.site-title {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: white;
+      font-size: 2rem;
+    }
+    @media(min-width: 640px) {
+      h1.site-title {
+        font-size: 2.5rem;
+      }
+    }
+    .hamburger {
+      cursor: pointer;
+      display: block;
+      width: 30px;
+      height: 25px;
+      position: relative;
+      z-index: 20;
+    }
+    .hamburger span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: white;
+      margin-bottom: 5px;
+      border-radius: 2px;
+      transition: all 0.3s ease-in-out;
+    }
+    .hamburger.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+    nav ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .menu {
+      display: none;
+    }
+    .menu.open {
+      display: block;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background: #b91c1c;
+      padding: 20px 0;
+      z-index: 10;
+    }
+    .menu.open li {
+      margin: 10px 0;
+      text-align: center;
+    }
+    .menu.open li a {
+      color: white;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+    @media(min-width: 768px) {
+      .hamburger { display: none; }
+      .menu {
+        display: flex !important;
+        position: static;
+        flex-direction: row;
+        background: transparent;
+        padding: 0;
+      }
+      .menu li { margin: 0 15px; }
+      .menu li a {
+        color: white;
+        font-weight: 500;
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
-<body class="bg-white text-gray-800">
-    <header class="bg-red-600 text-white p-5">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-3xl font-bold">Türk Yıldızı Birliği</h1>
+<body class="bg-white text-gray-900 font-sans leading-relaxed">
+
+<header class="bg-red-700 text-white shadow-md relative">
+  <div class="container mx-auto flex items-center justify-between p-4 relative">
+    <a href="index.html" class="site-title" aria-label="Ana Sayfa">
+      TÜRK YILDIZI BİRLİĞİ
+    </a>
+    <div class="hamburger" id="hamburger" aria-label="Menüyü aç/kapat" role="button" tabindex="0">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <nav aria-label="Ana navigasyon">
+      <ul class="menu" id="menu">
+        <li><a href="index.html" class="nav-link focus:ring-2 focus:ring-white">Ana Sayfa</a></li>
+        <li><a href="about.html" class="nav-link focus:ring-2 focus:ring-white">Hakkımızda</a></li>
+        <li><a href="projects.html" class="nav-link focus:ring-2 focus:ring-white">Projeler</a></li>
+        <li><a href="history.html" class="nav-link focus:ring-2 focus:ring-white">Türk Tarihi</a></li>
+        <li><a href="language.html" class="nav-link focus:ring-2 focus:ring-white">Türk Dili</a></li>
+        <li><a href="technology.html" class="nav-link focus:ring-2 focus:ring-white">Teknoloji</a></li>
+        <li><a href="apply.html" class="nav-link focus:ring-2 focus:ring-white">Üye Başvuru</a></li>
+        <li><a href="contact.html" class="nav-link focus:ring-2 focus:ring-white">İletişim</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container mx-auto max-w-screen-lg px-6 py-12">
+  <section class="mb-10">
+    <h2 class="text-4xl font-bold mb-6 text-red-700 text-center">Türk Tarihi</h2>
+    <p class="text-lg text-gray-800 leading-relaxed">
+      Türk tarihi, köklü medeniyetleri, kültürel mirası ve kahramanlıklarla dolu zengin bir geçmişe sahiptir. Ecdadımızın mirasını yaşatmak ve gelecek nesillere aktarmak için çalışıyoruz.
+    </p>
+  </section>
+  <section>
+    <!-- İstersen buraya tarih ile ilgili detaylı içerik ekleyebilirsin -->
+    <p class="text-gray-700 mb-4">
+      Tarihimize dair bilinmesi gereken önemli olaylar, kahramanlar ve kültürel değerler hakkında bilgi edinin.
+    </p>
+  </section>
+</main>
+
+<footer class="bg-red-700 text-white py-6 text-center tracking-wide">
+  <p>&copy; 2025 Türk Yıldızı Birliği. Tüm hakları saklıdır.</p>
+  <p class="mt-2 text-sm text-red-200">İtici gücümüz tarihimiz, rotamız yıldızlardır...</p>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const menu = document.getElementById('menu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    menu.classList.toggle('open');
+  });
+  hamburger.addEventListener('keypress', (e) => {
+    if(e.key === 'Enter' || e.key === ' ') {
+      hamburger.classList.toggle('open');
+      menu.classList.toggle('open');
+    }
+  });
+</script>
+
+</body>
+</html>
