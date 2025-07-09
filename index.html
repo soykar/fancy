@@ -16,87 +16,83 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
 
   <style>
-    /* Minimal ekstra stiller */
     .nav-link {
       transition: color 0.3s ease;
     }
     .nav-link:hover, .nav-link:focus {
-      color: #b91c1c; /* koyu kırmızı hover */
+      color: #b91c1c;
       outline: none;
     }
+
     footer {
       font-size: 0.9rem;
       letter-spacing: 0.05em;
     }
 
-    /* Türk Yıldızı Birliği başlığı için Orbitron ve özel efekt */
     h1.turk-yildizi {
       font-family: 'Orbitron', sans-serif;
       font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: #d71a21; /* Türk bayrağı kırmızısı */
+      color: #d71a21;
       text-shadow: 0 0 4px #d71a21;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      margin-bottom: 1rem;
       font-size: 2.5rem;
     }
     @media (min-width: 640px) {
-      h1.turk-yildizi {
-        font-size: 3.5rem;
-      }
+      h1.turk-yildizi { font-size: 3.5rem; }
     }
     @media (min-width: 768px) {
-      h1.turk-yildizi {
-        font-size: 4.5rem;
-      }
+      h1.turk-yildizi { font-size: 4.5rem; }
     }
     @media (min-width: 1024px) {
-      h1.turk-yildizi {
-        font-size: 5rem;
-      }
+      h1.turk-yildizi { font-size: 5rem; }
     }
 
-    /* Mobilde ve farklı ekranlarda metin taşmasını önlemek için */
     .break-words {
       overflow-wrap: break-word;
       word-break: break-word;
     }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 3px;
+      margin: 5px auto;
+      background-color: white;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
   </style>
 </head>
-
 <body class="bg-white text-gray-900 font-sans leading-relaxed">
 
   <header class="bg-red-700 text-white shadow-md">
-    <div class="container mx-auto flex flex-wrap items-center justify-between p-4">
+    <div class="container mx-auto flex items-center justify-between p-4">
       <a href="index.html" class="text-3xl font-extrabold tracking-widest hover:text-gray-300" aria-label="Ana Sayfa">
         TÜRK YILDIZI BİRLİĞİ
       </a>
 
       <!-- Hamburger Buton -->
-      <button id="menu-btn" class="block md:hidden focus:outline-none transition-transform duration-300" aria-label="Menüyü aç/kapa" aria-expanded="false" aria-controls="menu">
-        <span class="sr-only">Menüyü aç/kapa</span>
-  <div class="hamburger-lines relative w-8 h-8 flex flex-col justify-between">
-    <span class="line block h-1 w-full bg-white rounded transition-transform duration-300 origin-center"></span>
-    <span class="line block h-1 w-full bg-white rounded transition-opacity duration-300"></span>
-    <span class="line block h-1 w-full bg-white rounded transition-transform duration-300 origin-center"></span>
-  </div>
+      <button id="menu-btn" class="md:hidden hamburger focus:outline-none" aria-label="Menüyü aç/kapa" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-<script>
-  const menuBtn = document.getElementById('menu-btn');
-  const menu = document.getElementById('menu');
 
-  menuBtn.addEventListener('click', () => {
-    const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
-    menuBtn.setAttribute('aria-expanded', !isExpanded);
-    menu.classList.toggle('hidden');
-    menuBtn.classList.toggle('open');
-  });
-</script>
       <!-- Menü -->
-      <nav id="menu" class="hidden w-full md:flex md:w-auto" aria-label="Ana navigasyon">
-        <ul class="flex flex-col md:flex-row md:space-x-6 text-lg font-medium mt-4 md:mt-0">
+      <nav id="menu" class="hidden w-full md:flex md:w-auto mt-4 md:mt-0" aria-label="Ana navigasyon">
+        <ul class="flex flex-col md:flex-row md:space-x-6 text-lg font-medium">
           <li><a href="index.html" class="nav-link block py-2 px-3 hover:text-gray-300 focus:ring-2 focus:ring-white">Ana Sayfa</a></li>
           <li><a href="about.html" class="nav-link block py-2 px-3 hover:text-gray-300 focus:ring-2 focus:ring-white">Hakkımızda</a></li>
           <li><a href="projects.html" class="nav-link block py-2 px-3 hover:text-gray-300 focus:ring-2 focus:ring-white">Projeler</a></li>
@@ -112,42 +108,15 @@
 
   <main class="container mx-auto max-w-screen-lg px-6 py-12">
     <section class="text-center max-w-4xl mx-auto mb-16">
-      <h1 class="turk-yildizi">
-        Türk Yıldızı Birliği
-      </h1>
+      <h1 class="turk-yildizi">Türk Yıldızı Birliği</h1>
       <p class="text-xl text-gray-700 mb-8 break-words">
         “Kim olduğunu bilen, geleceğini şekillendirir.”<br><br>
-        Ecdadın mirasıyla dolu bir enerjiye sahip, hedefi yıldızlara uzanan bir roket gibi yola çıktık. Milli şuurumuzu koruyarak; tarihimize ve dilimize, geleceğin evrenine kodlanacak ebedi bir değer olarak sahip çıkacağız. 
+        Ecdadın mirasıyla dolu bir enerjiye sahip, hedefi yıldızlara uzanan bir roket gibi yola çıktık.
+        Milli şuurumuzu koruyarak; tarihimize ve dilimize, geleceğin evrenine kodlanacak ebedi bir değer olarak sahip çıkacağız.
       </p>
       <a href="about.html" class="inline-block bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 text-white font-semibold px-6 py-3 rounded-md transition">
         Daha Fazla Bilgi Edinin
       </a>
-    </section>
-
-    <section aria-label="Misyon, Vizyon ve Projelerimiz" class="grid gap-8 md:grid-cols-3">
-      <article class="bg-red-50 border border-red-200 rounded-lg shadow-sm p-6 hover:shadow-lg transition break-words">
-        <h2 class="text-2xl font-semibold mb-3 text-red-700">Misyonumuz</h2>
-        <p class="text-gray-800 mb-4">
-          Türk tarihini ve dilini yaşatmak, gençlerimizi bilinçli ve donanımlı bireyler olarak yetiştirmek.
-        </p>
-        <a href="mission.html" class="text-red-600 font-medium hover:underline" aria-label="Misyonumuz hakkında daha fazla bilgi">Devamını Oku →</a>
-      </article>
-
-      <article class="bg-red-50 border border-red-200 rounded-lg shadow-sm p-6 hover:shadow-lg transition break-words">
-        <h2 class="text-2xl font-semibold mb-3 text-red-700">Vizyonumuz</h2>
-        <p class="text-gray-800 mb-4">
-          Gençlerimize ilham olmak, milli şuuru güçlendirmek ve teknolojiyle donanmış bir nesil yetiştirmek.
-        </p>
-        <a href="vision.html" class="text-red-600 font-medium hover:underline" aria-label="Vizyonumuz hakkında daha fazla bilgi">Devamını Oku →</a>
-      </article>
-
-      <article class="bg-red-50 border border-red-200 rounded-lg shadow-sm p-6 hover:shadow-lg transition break-words">
-        <h2 class="text-2xl font-semibold mb-3 text-red-700">Projelerimiz</h2>
-        <p class="text-gray-800 mb-4">
-          Ülkemizin köklü tarihinden ilham alıyor, milli değerlerimizi bilim ve teknolojiyle buluşturarak geleceğin Türkiye’sini inşa ediyoruz.
-        </p>
-        <a href="projects.html" class="text-red-600 font-medium hover:underline" aria-label="Projelerimiz hakkında daha fazla bilgi">Devamını Oku →</a>
-      </article>
     </section>
   </main>
 
@@ -156,6 +125,7 @@
     <p class="mt-2 text-sm text-red-200">İtici gücümüz tarihimiz, rotamız yıldızlardır...</p>
   </footer>
 
+  <!-- Hamburger Menü Scripti -->
   <script>
     const menuBtn = document.getElementById('menu-btn');
     const menu = document.getElementById('menu');
@@ -164,6 +134,7 @@
       const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
       menuBtn.setAttribute('aria-expanded', !isExpanded);
       menu.classList.toggle('hidden');
+      menuBtn.classList.toggle('open');
     });
   </script>
 
