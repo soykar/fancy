@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ali Kuşçu Simülasyonu</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Ali Kuşçu’nun Yolu</h1>
+    <img src="images/ali-kuscu.png" alt="Ali Kuşçu" class="character" />
+    
+    <audio id="voice" src="audio/hosgeldin.mp3" preload="auto"></audio>
+    <button id="sesAcBtn">Ses Aç</button>
+
+    <p>Ben Ali Kuşçu. Bilimin ışığında yürürken seni bir karar bekliyor...</p>
+
+    <button onclick="choose('a')">Semerkand’a git</button>
+    <button onclick="choose('b')">İstanbul’da kal</button>
+  </div>
+
+  <script>
+    const ses = document.getElementById('voice');
+    const btn = document.getElementById('sesAcBtn');
+
+    btn.addEventListener('click', () => {
+      ses.play();
+    });
+
+    function choose(option) {
+      alert("Seçiminiz: " + option);
+      // Senaryo genişletilebilir
+    }
+  </script>
+</body>
+</html>
