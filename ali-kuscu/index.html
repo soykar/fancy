@@ -4,89 +4,226 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ali Kuşçu Simülasyonu</title>
-  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       margin: 0;
       font-family: 'Georgia', serif;
-      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      background: url('images/stars-bg.png') center/cover no-repeat,
+                 linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
       overflow: hidden;
+      animation: stars 20s linear infinite;
+    }
+
+    @keyframes stars {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 1000px; }
     }
 
     .container {
       text-align: center;
       padding: 20px;
-      background-color: rgba(0, 0, 0, 0.6);
+      background-color: rgba(0, 0, 0, 0.7);
       border-radius: 20px;
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
       max-width: 90%;
       width: 400px;
+      backdrop-filter: blur(5px);
     }
 
     h1 {
       font-size: 2em;
       margin-bottom: 10px;
       color: #f9e79f;
+      text-shadow: 0 0 5px rgba(249, 231, 159, 0.5);
     }
 
     p {
       margin: 15px 0;
       font-size: 1.1em;
+      line-height: 1.5;
     }
 
     .character {
       width: 200px;
       border-radius: 10px;
       margin-bottom: 15px;
+      border: 2px solid #f39c12;
     }
 
     button {
       background-color: #f39c12;
       border: none;
       color: #000;
-      padding: 10px 20px;
+      padding: 15px 25px;
       margin: 10px;
       border-radius: 10px;
       cursor: pointer;
       font-weight: bold;
-      transition: background-color 0.3s;
+      transition: all 0.3s;
+      min-width: 120px;
+      font-size: 1.1em;
+      touch-action: manipulation;
     }
 
     button:hover {
       background-color: #d68910;
+      transform: scale(1.05);
+    }
+
+    .score-display {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(0,0,0,0.7);
+      padding: 10px;
+      border-radius: 10px;
+      font-size: 1em;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        width: 95%;
+        padding: 15px;
+      }
+      button {
+        padding: 12px 20px;
+        font-size: 1em;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Ali Kuşçu’nun Yolu</h1>
-    <img src="images/ali-kuscu.png" alt="Ali Kuşçu" class="character" />
+  <div class="score-display">Bilim Puanı: <span id="score">0</span></div>
+  
+  <div class="container" id="scene-container">
+    <h1 id="scene-title">Ali Kuşçu'nun Yolu</h1>
+    <img src="images/ali-kuscu.png" alt="Ali Kuşçu" class="character" id="scene-image" />
     
     <audio id="voice" src="audio/hosgeldin.mp3" preload="auto"></audio>
     <button id="sesAcBtn">🔊 Hoş Geldin Sesini Aç</button>
 
-    <p>Ben Ali Kuşçu. Bilimin ışığında yürürken seni bir karar bekliyor...</p>
+    <p id="scene-text">Ben Ali Kuşçu. Bilimin ışığında yürürken seni bir karar bekliyor...</p>
 
-    <button onclick="choose('Semerkand')">📜 Semerkand’a git</button>
-    <button onclick="choose('İstanbul')">🏰 İstanbul’da kal</button>
+    <div id="options-container">
+      <button class="option-btn" onclick="chooseOption(0)">📜 Semerkand'a git</button>
+      <button class="option-btn" onclick="chooseOption(1)">🏰 İstanbul'da kal</button>
+    </div>
   </div>
 
   <script>
-    const ses = document.getElementById('voice');
-    const btn = document.getElementById('sesAcBtn');
+    // Oyun durumu
+    let bilimPuan = 0;
+    let currentScene = 'start';
+    
+    // Sahne tanımları
+    const scenes = {
+      start: {
+        title: "Ali Kuşçu'nun Yolu",
+        text: "Ben Ali Kuşçu. Bilimin ışığında yürürken seni bir karar bekliyor...",
+        image: "ali-kuscu.png",
+        options: [
+          { 
+            text: "🔹 Kirman'a git (Cesaret)", 
+            action: function() {
+              bilimPuan += 10;
+              loadScene("kirman");
+            }
+          },
+          { 
+            text: "🔸 Semerkand'da kal (Konfor)", 
+            action: function() {
+              bilimPuan -= 5;
+              loadScene("semerkand");
+            }
+          }
+        ]
+      },
+      kirman: {
+        title: "Kirman Yolculuğu",
+        text: "Kirman'da Ay'ın evrelerini inceliyorsun. Yeni eserler yazıyorsun...",
+        image: "ali-kuscu.png",
+        options: [
+          {
+            text: "🔹 Elçiliği kabul et (İstanbul'a git)",
+            action: function() {
+              bilimPuan += 15;
+              loadScene("istanbul");
+            }
+          },
+          {
+            text: "🔸 Hacca devam et",
+            action: function() {
+              bilimPuan += 5;
+              loadScene("hac");
+            }
+          }
+        ]
+      },
+      semerkand: {
+        title: "Semerkand'da Kaldın",
+        text: "Geleneksel eğitime devam ediyorsun ama içinde bir ukde kalıyor...",
+        image: "ali-kuscu.png",
+        options: [
+          {
+            text: "🔹 Yeniden karar ver",
+            action: function() {
+              loadScene("start");
+            }
+          }
+        ]
+      }
+    };
 
-    btn.addEventListener('click', () => {
+    // DOM elementleri
+    const ses = document.getElementById('voice');
+    const sesAcBtn = document.getElementById('sesAcBtn');
+    const scoreElement = document.getElementById('score');
+    const sceneContainer = document.getElementById('scene-container');
+    const sceneTitle = document.getElementById('scene-title');
+    const sceneText = document.getElementById('scene-text');
+    const sceneImage = document.getElementById('scene-image');
+    const optionsContainer = document.getElementById('options-container');
+
+    // Ses butonu
+    ses.volume = 0.3;
+    sesAcBtn.addEventListener('click', () => {
       ses.play();
     });
 
+    // Sahne yükleme
+    function loadScene(sceneId) {
+      currentScene = sceneId;
+      const scene = scenes[sceneId];
+      
+      sceneTitle.textContent = scene.title;
+      sceneText.textContent = scene.text;
+      sceneImage.src = `images/${scene.image}`;
+      scoreElement.textContent = bilimPuan;
+      
+      // Seçenekleri temizle ve yenilerini ekle
+      optionsContainer.innerHTML = '';
+      scene.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = option.text;
+        btn.onclick = () => {
+          option.action();
+        };
+        optionsContainer.appendChild(btn);
+      });
+    }
+
+    // Başlangıç sahnesini yükle
+    loadScene('start');
+
+    // Eski fonksiyon (geriye dönük uyumluluk)
     function choose(option) {
       alert("Seçiminiz: " + option + "\nYeni bir yolculuk başlıyor...");
-      // Genişletilebilir alan
     }
   </script>
 </body>
