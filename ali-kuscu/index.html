@@ -173,12 +173,6 @@
         height: 150px;
       }
     }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-      .container {
-        max-width: 700px;
-      }
-    }
   </style>
 </head>
 <body>
@@ -199,35 +193,16 @@
 
   <button class="history-btn" id="history-btn">📜</button>
 
-  <audio id="bg-audio" src="audio/hosgeldin.mp3" preload="auto"></audio>
-  <audio id="voice-audio" preload="auto"></audio>
-
   <script>
+    // Oyun Durumu
     const gameState = {
       currentScene: 'start',
       scienceScore: 0,
       decisions: [],
-      unlockedScenes: ['start'],
-      audioEnabled: true,
       isProcessing: false
     };
 
-    const audioFiles = {
-      scenes: {
-        start: 'hosgeldin.mp3',
-        kirman: 'kirman.mp3',
-        semerkand: 'semerkand.mp3',
-        tebriz: 'tebriz.mp3',
-        istanbul: 'istanbul.mp3'
-      },
-      options: {
-        kirman: 'kirman_secim.mp3',
-        semerkand: 'semerkand_secim.mp3',
-        elci: 'elci_secim.mp3',
-        hac: 'hac_secim.mp3'
-      }
-    };
-
+    // Senaryo Yapısı
     const scenes = {
       start: {
         title: "Gökyüzüne Yazılmış Bir Kader",
@@ -238,21 +213,17 @@
           {
             text: "Kirman'a git",
             nextScene: "kirman",
-            audio: "kirman_secim.mp3",
             effects: {
               scienceScore: 10,
-              text: "Kirman'a giderek Ay'ın evrelerini incelemeye ve yeni eserler kaleme almaya karar verdiniz. Bu cesur adım bilimsel yeteneklerinizi geliştiriyor.",
-              unlock: ["kirman"]
+              text: "Kirman'a giderek Ay'ın evrelerini incelemeye ve yeni eserler kaleme almaya karar verdiniz. Bu cesur adım bilimsel yeteneklerinizi geliştiriyor."
             }
           },
           {
             text: "Semerkand'da kal",
             nextScene: "semerkand",
-            audio: "semerkand_secim.mp3",
             effects: {
               scienceScore: -5,
-              text: "Geleneksel eğitiminizle yetinmeyi seçtiniz. Bu güvenli karar, bilimsel gelişiminizi yavaşlatıyor.",
-              unlock: ["semerkand"]
+              text: "Geleneksel eğitiminizle yetinmeyi seçtiniz. Bu güvenli karar, bilimsel gelişiminizi yavaşlatıyor."
             }
           }
         ]
@@ -266,39 +237,17 @@
           {
             text: "Elçiliği kabul et",
             nextScene: "istanbul",
-            audio: "elci_secim.mp3",
             effects: {
               scienceScore: 15,
-              text: "Uzun Hasan'ın teklifini kabul ederek Osmanlı'ya elçi olarak gidiyorsunuz. Bu karar bilim tarihini değiştirecek.",
-              unlock: ["istanbul"]
+              text: "Uzun Hasan'ın teklifini kabul ederek Osmanlı'ya elçi olarak gidiyorsunuz. Bu karar bilim tarihini değiştirecek."
             }
           },
           {
             text: "Hacca devam et",
             nextScene: "hac",
-            audio: "hac_secim.mp3",
             effects: {
               scienceScore: 5,
-              text: "Manevi yolculuğunuzu seçtiniz. Bu sizi tatmin etse de bilimsel etkiniz sınırlı kalıyor.",
-              unlock: ["hac"]
-            }
-          }
-        ]
-      },
-      semerkand: {
-        title: "Konfor Alanında Kalmak",
-        location: "Semerkand - 1450",
-        text: "Semerkand'da kalmayı seçtiniz. Geleneksel eğitim size huzur veriyor ama içinde bir ukde kalıyor...",
-        image: "ali-kuscu.png",
-        options: [
-          {
-            text: "Yeniden karar ver",
-            nextScene: "start",
-            audio: "yeniden_secim.mp3",
-            effects: {
-              scienceScore: 0,
-              text: "Kararınızdan pişman oldunuz ve yeni bir yol seçmeye karar verdiniz.",
-              unlock: []
+              text: "Manevi yolculuğunuzu seçtiniz. Bu sizi tatmin etse de bilimsel etkiniz sınırlı kalıyor."
             }
           }
         ]
@@ -312,27 +261,40 @@
           {
             text: "Reform yap",
             nextScene: "reform",
-            audio: "reform_secim.mp3",
             effects: {
               scienceScore: 20,
-              text: "Astronomi ve matematiği medrese programına entegre ederek Osmanlı biliminde devrim yapıyorsunuz.",
-              unlock: ["reform"]
+              text: "Astronomi ve matematiği medrese programına entegre ederek Osmanlı biliminde devrim yapıyorsunuz."
             }
           },
           {
             text: "Geleneksel kal",
             nextScene: "geleneksel",
-            audio: "geleneksel_secim.mp3",
             effects: {
               scienceScore: -10,
-              text: "Sistemi korumayı seçtiniz ancak bu karar Osmanlı'nın bilimsel gelişimini yavaşlatıyor.",
-              unlock: ["geleneksel"]
+              text: "Sistemi korumayı seçtiniz ancak bu karar Osmanlı'nın bilimsel gelişimini yavaşlatıyor."
+            }
+          }
+        ]
+      },
+      semerkand: {
+        title: "Konfor Alanında Kalmak",
+        location: "Semerkand - 1450",
+        text: "Semerkand'da kalmayı seçtiniz. Geleneksel eğitim size huzur veriyor ama içinde bir ukde kalıyor...",
+        image: "ali-kuscu.png",
+        options: [
+          {
+            text: "Yeniden karar ver",
+            nextScene: "start",
+            effects: {
+              scienceScore: 0,
+              text: "Kararınızdan pişman oldunuz ve yeni bir yol seçmeye karar verdiniz."
             }
           }
         ]
       }
     };
 
+    // DOM Elementleri
     const sceneContainer = document.getElementById('scene-container');
     const sceneTitle = document.getElementById('scene-title');
     const locationTime = document.getElementById('location-time');
@@ -340,38 +302,16 @@
     const characterImg = document.getElementById('character-img');
     const optionsContainer = document.getElementById('options-container');
     const historyBtn = document.getElementById('history-btn');
-    const bgAudio = document.getElementById('bg-audio');
-    const voiceAudio = document.getElementById('voice-audio');
 
-    function initGame() {
-      if(/Mobi|Android/i.test(navigator.userAgent)) {
-        document.querySelectorAll('.option-btn').forEach(btn => {
-          btn.style.padding = '20px';
-          btn.style.fontSize = '1.2rem';
-        });
-      }
-
-      bgAudio.volume = 0.4;
-      bgAudio.loop = false;
-      
-      document.addEventListener('click', function(e) {
-        if(e.target.classList.contains('option-btn') && !gameState.isProcessing) {
-          const optionIndex = parseInt(e.target.getAttribute('data-option'));
-          chooseOption(optionIndex);
-        }
-      });
-
-      historyBtn.addEventListener('click', showHistory);
-      loadScene('start');
-    }
-
+    // Sahne Yükle
     function loadScene(sceneId) {
-      if(!scenes[sceneId] || gameState.isProcessing) return;
-
+      if(gameState.isProcessing || !scenes[sceneId]) return;
+      
       gameState.isProcessing = true;
       const scene = scenes[sceneId];
       gameState.currentScene = sceneId;
 
+      // UI Güncelle
       sceneContainer.classList.remove('fade-in');
       void sceneContainer.offsetWidth;
       sceneContainer.classList.add('fade-in');
@@ -381,36 +321,20 @@
       sceneText.textContent = scene.text;
       characterImg.src = `images/${scene.image}`;
 
-      renderOptions(scene.options);
-
-      if(gameState.audioEnabled && audioFiles.scenes[sceneId]) {
-        playAudio(`audio/${audioFiles.scenes[sceneId]}`);
-      }
-
-      if(!gameState.decisions.some(d => d.scene === sceneId)) {
-        gameState.decisions.push({
-          scene: sceneId,
-          title: scene.title,
-          location: scene.location,
-          date: new Date().toISOString()
-        });
-      }
+      // Seçenekleri Temizle ve Yenilerini Ekle
+      optionsContainer.innerHTML = '';
+      scene.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = option.text;
+        btn.onclick = () => chooseOption(index);
+        optionsContainer.appendChild(btn);
+      });
 
       gameState.isProcessing = false;
     }
 
-    function renderOptions(options) {
-      optionsContainer.innerHTML = '';
-      
-      options.forEach((option, index) => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.textContent = option.text;
-        btn.setAttribute('data-option', index);
-        optionsContainer.appendChild(btn);
-      });
-    }
-
+    // Seçim Yap
     function chooseOption(optionIndex) {
       if(gameState.isProcessing) return;
       gameState.isProcessing = true;
@@ -418,45 +342,20 @@
       const currentScene = scenes[gameState.currentScene];
       const selectedOption = currentScene.options[optionIndex];
 
-      if(gameState.audioEnabled && selectedOption.audio) {
-        playAudio(`audio/${selectedOption.audio}`);
-      }
-
+      // Etkileri Uygula
       if(selectedOption.effects) {
-        if(selectedOption.effects.scienceScore) {
-          gameState.scienceScore += selectedOption.effects.scienceScore;
-        }
-        
-        if(selectedOption.effects.text) {
-          sceneText.textContent = selectedOption.effects.text;
-        }
-
-        if(selectedOption.effects.unlock) {
-          selectedOption.effects.unlock.forEach(scene => {
-            if(!gameState.unlockedScenes.includes(scene)) {
-              gameState.unlockedScenes.push(scene);
-            }
-          });
-        }
+        gameState.scienceScore += selectedOption.effects.scienceScore || 0;
+        sceneText.textContent = selectedOption.effects.text;
       }
 
-      gameState.decisions.push({
-        scene: gameState.currentScene,
-        choice: selectedOption.text,
-        date: new Date().toISOString()
-      });
-
+      // Sonraki Sahneye Geç
       setTimeout(() => {
         loadScene(selectedOption.nextScene);
         gameState.isProcessing = false;
-      }, 1000);
+      }, 500);
     }
 
-    function playAudio(src) {
-      voiceAudio.src = src;
-      voiceAudio.play().catch(e => console.log("Ses oynatma hatası:", e));
-    }
-
+    // Tarihçe Göster
     function showHistory() {
       let historyText = "Karar Geçmişiniz:\n\n";
       gameState.decisions.forEach((decision, index) => {
@@ -468,7 +367,9 @@
       alert(historyText);
     }
 
-    window.addEventListener('DOMContentLoaded', initGame);
+    // Oyunu Başlat
+    loadScene('start');
+    historyBtn.addEventListener('click', showHistory);
   </script>
 </body>
 </html>
