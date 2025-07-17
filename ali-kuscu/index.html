@@ -142,7 +142,6 @@
       border: none;
     }
 
-    /* Animasyonlar */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -152,7 +151,6 @@
       animation: fadeIn 0.5s ease-out forwards;
     }
 
-    /* Mobil Optimizasyon */
     @media (max-width: 768px) {
       .container {
         padding: 20px 15px;
@@ -176,7 +174,6 @@
       }
     }
 
-    /* Tablet ve daha büyük ekranlar */
     @media (min-width: 769px) and (max-width: 1024px) {
       .container {
         max-width: 700px;
@@ -202,21 +199,19 @@
 
   <button class="history-btn" id="history-btn">📜</button>
 
-  <!-- Ses Elementleri -->
   <audio id="bg-audio" src="audio/hosgeldin.mp3" preload="auto"></audio>
   <audio id="voice-audio" preload="auto"></audio>
 
   <script>
-    // Oyun Durumu
     const gameState = {
       currentScene: 'start',
       scienceScore: 0,
       decisions: [],
       unlockedScenes: ['start'],
-      audioEnabled: true
+      audioEnabled: true,
+      isProcessing: false
     };
 
-    // Ses Dosyaları
     const audioFiles = {
       scenes: {
         start: 'hosgeldin.mp3',
@@ -233,7 +228,6 @@
       }
     };
 
-    // Detaylı Senaryo
     const scenes = {
       start: {
         title: "Gökyüzüne Yazılmış Bir Kader",
@@ -339,7 +333,6 @@
       }
     };
 
-    // DOM Elementleri
     const sceneContainer = document.getElementById('scene-container');
     const sceneTitle = document.getElementById('scene-title');
     const locationTime = document.getElementById('location-time');
@@ -350,9 +343,7 @@
     const bgAudio = document.getElementById('bg-audio');
     const voiceAudio = document.getElementById('voice-audio');
 
-    // Oyunu Başlat
     function initGame() {
-      // Mobil ayarları
       if(/Mobi|Android/i.test(navigator.userAgent)) {
         document.querySelectorAll('.option-btn').forEach(btn => {
           btn.style.padding = '20px';
@@ -360,35 +351,29 @@
         });
       }
 
-      // Arka plan müziği
       bgAudio.volume = 0.4;
       bgAudio.loop = false;
       
-      // Tüm seçenek butonlarına event listener ekle
-      document.querySelectorAll('.option-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-          const optionIndex = parseInt(this.getAttribute('data-option'));
+      document.addEventListener('click', function(e) {
+        if(e.target.classList.contains('option-btn') && !gameState.isProcessing) {
+          const optionIndex = parseInt(e.target.getAttribute('data-option'));
           chooseOption(optionIndex);
-        });
+        }
       });
 
-      // Tarih butonu
       historyBtn.addEventListener('click', showHistory);
-
-      // İlk sahneyi yükle
       loadScene('start');
     }
 
-    // Sahne Yükle
     function loadScene(sceneId) {
-      if(!scenes[sceneId]) return;
+      if(!scenes[sceneId] || gameState.isProcessing) return;
 
+      gameState.isProcessing = true;
       const scene = scenes[sceneId];
       gameState.currentScene = sceneId;
 
-      // UI Güncelle
       sceneContainer.classList.remove('fade-in');
-      void sceneContainer.offsetWidth; // Reflow
+      void sceneContainer.offsetWidth;
       sceneContainer.classList.add('fade-in');
 
       sceneTitle.textContent = scene.title;
@@ -396,15 +381,12 @@
       sceneText.textContent = scene.text;
       characterImg.src = `images/${scene.image}`;
 
-      // Seçenekleri oluştur
       renderOptions(scene.options);
 
-      // Sahne sesini çal
       if(gameState.audioEnabled && audioFiles.scenes[sceneId]) {
         playAudio(`audio/${audioFiles.scenes[sceneId]}`);
       }
 
-      // Karar geçmişine ekle
       if(!gameState.decisions.some(d => d.scene === sceneId)) {
         gameState.decisions.push({
           scene: sceneId,
@@ -413,9 +395,10 @@
           date: new Date().toISOString()
         });
       }
+
+      gameState.isProcessing = false;
     }
 
-    // Seçenekleri Render Et
     function renderOptions(options) {
       optionsContainer.innerHTML = '';
       
@@ -428,17 +411,17 @@
       });
     }
 
-    // Seçim Yap
     function chooseOption(optionIndex) {
+      if(gameState.isProcessing) return;
+      gameState.isProcessing = true;
+
       const currentScene = scenes[gameState.currentScene];
       const selectedOption = currentScene.options[optionIndex];
 
-      // Seçim sesini çal
       if(gameState.audioEnabled && selectedOption.audio) {
         playAudio(`audio/${selectedOption.audio}`);
       }
 
-      // Etkileri uygula
       if(selectedOption.effects) {
         if(selectedOption.effects.scienceScore) {
           gameState.scienceScore += selectedOption.effects.scienceScore;
@@ -457,40 +440,34 @@
         }
       }
 
-      // Karar geçmişine ekle
       gameState.decisions.push({
         scene: gameState.currentScene,
         choice: selectedOption.text,
         date: new Date().toISOString()
       });
 
-      // Sonraki sahneye geç
       setTimeout(() => {
         loadScene(selectedOption.nextScene);
-      }, 2000);
+        gameState.isProcessing = false;
+      }, 1000);
     }
 
-    // Ses Çal
     function playAudio(src) {
       voiceAudio.src = src;
       voiceAudio.play().catch(e => console.log("Ses oynatma hatası:", e));
     }
 
-    // Tarihçe Göster
     function showHistory() {
       let historyText = "Karar Geçmişiniz:\n\n";
       gameState.decisions.forEach((decision, index) => {
-        historyText += `${index + 1}. ${decision.scene} - ${decision.choice || 'Giriş'}\n`;
-        if(decision.location) {
-          historyText += `   📍 ${decision.location}\n`;
-        }
-        historyText += "\n";
+        historyText += `${index + 1}. ${decision.title}\n`;
+        historyText += `   Seçim: ${decision.choice || 'Giriş'}\n`;
+        historyText += `   📍 ${decision.location}\n\n`;
       });
       
       alert(historyText);
     }
 
-    // Sayfa yüklendiğinde oyunu başlat
     window.addEventListener('DOMContentLoaded', initGame);
   </script>
 </body>
