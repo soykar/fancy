@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zamanın Ötesindeki Âlim - Ali Kuşçu Simülasyonu</title>
+    <title>Türk Yıldızı Birliği - Ali Kuşçu'nun Yolculuğu</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TR:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -24,65 +24,73 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            line-height: 1.8;
         }
 
         .container {
             width: 90%;
             max-width: 800px;
-            background: rgba(10, 10, 30, 0.9);
+            background: rgba(10, 10, 30, 0.95);
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-            border: 2px solid var(--osmanli-altin);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            border: 3px solid var(--osmanli-altin);
             overflow: hidden;
-            position: relative;
             margin: 2rem auto;
+            position: relative;
         }
 
-        .container::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--hatayi-kirmizi), var(--osmanli-altin), var(--koyu-lacivert));
-        }
-
-        .scene-header {
-            padding: 2rem;
+        .header {
+            background: linear-gradient(90deg, var(--hatayi-kirmizi), var(--osmanli-altin));
+            padding: 1.5rem;
             text-align: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 2px solid var(--osmanli-altin);
+        }
+
+        .logo {
+            max-width: 150px;
+            margin-bottom: 1rem;
         }
 
         .scene-title {
             font-size: 2rem;
-            color: var(--osmanli-altin);
-            margin-bottom: 0.5rem;
+            color: white;
+            margin: 0;
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .location-time {
             font-style: italic;
-            color: var(--osmanli-altin);
+            color: var(--fildisi);
+            margin-top: 0.5rem;
             font-size: 1.1rem;
         }
 
         .scene-content {
             padding: 2rem;
+        }
+
+        .character-info {
             display: flex;
-            flex-direction: column;
             align-items: center;
+            margin-bottom: 2rem;
+            background: rgba(20, 20, 40, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--osmanli-altin);
         }
 
         .character-image {
-            width: 200px;
-            height: 200px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            border: 4px solid var(--osmanli-altin);
+            border: 3px solid var(--osmanli-altin);
             object-fit: cover;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            margin-right: 1.5rem;
+        }
+
+        .character-desc {
+            flex: 1;
+            font-size: 0.95rem;
         }
 
         .scene-text {
@@ -91,12 +99,18 @@
             border-radius: 10px;
             margin-bottom: 2rem;
             border-left: 4px solid var(--hatayi-kirmizi);
-            line-height: 1.8;
-            font-size: 1.1rem;
+        }
+
+        .historical-note {
+            background: rgba(212, 175, 55, 0.15);
+            border-left: 4px solid var(--osmanli-altin);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+            font-size: 0.9rem;
         }
 
         .options-container {
-            width: 100%;
             display: grid;
             grid-template-columns: 1fr;
             gap: 1rem;
@@ -106,23 +120,31 @@
             background: linear-gradient(135deg, var(--koyu-lacivert), var(--hatayi-kirmizi));
             color: white;
             border: none;
-            padding: 1rem;
+            padding: 1.2rem;
             border-radius: 8px;
             font-family: 'Noto Serif TR', serif;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
 
         .option-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.4);
         }
 
         .option-btn:active {
             transform: translateY(1px);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            color: rgba(248, 244, 230, 0.7);
+            border-top: 1px solid rgba(212, 175, 55, 0.3);
         }
 
         @media (max-width: 768px) {
@@ -131,96 +153,164 @@
                 margin: 1rem auto;
             }
             
-            .scene-title {
-                font-size: 1.6rem;
+            .character-info {
+                flex-direction: column;
+                text-align: center;
             }
             
             .character-image {
-                width: 150px;
-                height: 150px;
+                margin-right: 0;
+                margin-bottom: 1rem;
             }
             
-            .scene-text {
-                padding: 1rem;
-                font-size: 1rem;
+            .scene-title {
+                font-size: 1.6rem;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="scene-header">
-            <h1 class="scene-title" id="scene-title">Zamanın Ötesindeki Âlim</h1>
-            <div class="location-time" id="location-time">Semerkand - 1449</div>
+        <div class="header">
+            <img src="images/tyb-logo.png" alt="Türk Yıldızı Birliği" class="logo">
+            <h1 class="scene-title" id="scene-title">Ali Kuşçu'nun Yolculuğu</h1>
+            <div class="location-time" id="location-time">Semerkand - 15. Yüzyıl</div>
         </div>
         
         <div class="scene-content">
-            <img src="images/ali-kuscu.png" alt="Ali Kuşçu" class="character-image" id="character-image">
+            <div class="character-info">
+                <img src="images/ali-kuscu.png" alt="Ali Kuşçu" class="character-image" id="character-image">
+                <div class="character-desc">
+                    <p><strong>Ali Kuşçu (1403-1474):</strong> Türk-İslam dünyasının yetiştirdiği en önemli astronom ve matematikçilerden. Semerkand'da doğdu, Uluğ Bey'in öğrencisi oldu. Osmanlı'da astronomi ve matematik eğitiminin temellerini attı.</p>
+                </div>
+            </div>
             
             <div class="scene-text" id="scene-text">
-                Semerkand'ın yıldızlarla örülü gecelerinde gökyüzünü izleyen bir gençsiniz. Kadızâde Rûmî'nin rehberliğinde hesaplamalarınız ve gözlem yeteneğinizle tanınıyorsunuz.
+                <p>15. yüzyıl Semerkand'ında, Uluğ Bey'in kurduğu rasathanede gökyüzünü inceliyorsunuz. Timur İmparatorluğu'nun bilim merkezinde, dönemin en ileri astronomi çalışmalarına katılıyorsunuz.</p>
+                
+                <div class="historical-note">
+                    <strong>Did you know?</strong> Semerkand'daki rasathane, o dönem dünyanın en gelişmiş gözlemeviydi. Uluğ Bey'in hazırlattığı "Zeyç Kürkani" adlı yıldız kataloğu, 400 yıl boyunca kullanıldı.
+                </div>
             </div>
             
             <div class="options-container" id="options-container">
-                <button class="option-btn" data-option="0">Kirman'a git</button>
-                <button class="option-btn" data-option="1">Semerkand'da kal</button>
+                <button class="option-btn" data-option="0">Kirman'a Git - Bilim Peşinde</button>
+                <button class="option-btn" data-option="1">Semerkand'da Kal - Geleneksel Eğitim</button>
             </div>
+        </div>
+        
+        <div class="footer">
+            Türk Yıldızı Birliği - Bilim Tarihimizin Yıldızlarını Keşfedin
         </div>
     </div>
 
     <script>
         const scenes = {
             start: {
-                title: "Gökyüzüne Yazılmış Bir Kader",
-                location: "Semerkand - 1449",
-                text: "Semerkand'ın yıldızlarla örülü gecelerinde gökyüzünü izleyen bir gençsiniz. Kadızâde Rûmî'nin rehberliğinde hesaplamalarınız ve gözlem yeteneğinizle tanınıyorsunuz. Ancak içinizde sınırların ötesini görme arzusu var...",
+                title: "Ali Kuşçu'nun Yolculuğu",
+                location: "Semerkand - 1425",
+                text: `
+                <p>Uluğ Bey'in rasathanesinde çalışıyorsunuz. Dönemin en gelişmiş astronomi aletleriyle yıldızları inceliyorsunuz. Ancak daha fazlasını öğrenme arzusu sizi rahat bırakmıyor.</p>
+                
+                <div class="historical-note">
+                    <strong>Kirman Neresi?</strong> İran'ın güneydoğusunda önemli bir bilim merkezi. Dönemin ünlü bilginleri burada ders verirdi.
+                </div>
+                `,
                 image: "ali-kuscu.png",
                 options: [
                     {
-                        text: "Kirman'a git",
+                        text: "Kirman'a Git - Bilim Peşinde",
                         nextScene: "kirman",
-                        resultText: "Kirman'a giderek Ay'ın evrelerini incelemeye ve yeni eserler kaleme almaya karar verdiniz. Bu cesur adım bilimsel yeteneklerinizi geliştiriyor."
+                        resultText: `
+                        <p>Kirman'a giderek dönemin ünlü bilginlerinden ders alıyorsunuz. Burada Ay'ın evreleri üzerine çığır açıcı çalışmalar yapıyorsunuz.</p>
+                        
+                        <div class="historical-note">
+                            Ali Kuşçu'nun Kirman'da yazdığı "Risale fi'l-Hey'e" adlı astronomi eseri, Osmanlı medreselerinde ders kitabı olarak okutuldu.
+                        </div>
+                        `
                     },
                     {
-                        text: "Semerkand'da kal",
+                        text: "Semerkand'da Kal - Geleneksel Eğitim",
                         nextScene: "semerkand",
-                        resultText: "Geleneksel eğitiminizle yetinmeyi seçtiniz. Bu güvenli karar, bilimsel gelişiminizi yavaşlatıyor."
+                        resultText: `
+                        <p>Semerkand'da kalmayı seçtiniz. Uluğ Bey'in yönetimindeki rasathanede çalışmalarınıza devam ediyorsunuz.</p>
+                        
+                        <div class="historical-note">
+                            Uluğ Bey'in rasathanesi 1449'da yıkıldı. Eğer tarihte Ali Kuşçu Kirman'a gitmeseydi, Osmanlı bilim tarihi çok farklı gelişebilirdi.
+                        </div>
+                        `
                     }
                 ]
             },
             kirman: {
-                title: "Bilime Ulaşmanın Gizli Yolu",
-                location: "Kirman - 1450",
-                text: "Kirman'da geçirdiğiniz sürede Ay'ın evreleri üzerine çığır açıcı çalışmalar yapıyorsunuz. Ancak şimdi yeni bir karşısınız... Akkoyunlu lideri Uzun Hasan size Osmanlı'ya elçi olmayı teklif ediyor.",
-                image: "ali-kuscu.png",
+                title: "Bilimin Peşinde",
+                location: "Kirman - 1435",
+                text: `
+                <p>Kirman'da 10 yıl geçirdiniz. Artık dönemin saygın bilginlerindensiniz. Akkoyunlu hükümdarı Uzun Hasan sizi özel olarak çağırıyor.</p>
+                
+                <div class="historical-note">
+                    <strong>Tarihi An:</strong> Osmanlı ile Akkoyunlular arasında diplomatik ilişkiler gerilimli. Bilim insanları bu dönemde iki devlet arasında köprü görevi görüyordu.
+                </div>
+                `,
+                image: "ali-kuscu-kirman.png",
                 options: [
                     {
-                        text: "Elçiliği kabul et",
+                        text: "Elçiliği Kabul Et - İstanbul'a Git",
                         nextScene: "istanbul",
-                        resultText: "Uzun Hasan'ın teklifini kabul ederek Osmanlı'ya elçi olarak gidiyorsunuz. Bu karar bilim tarihini değiştirecek."
+                        resultText: `
+                        <p>Uzun Hasan'ın elçisi olarak İstanbul'a gidiyorsunuz. Fatih Sultan Mehmed sizi büyük bir saygıyla karşılıyor.</p>
+                        
+                        <div class="historical-note">
+                            Ali Kuşçu'nun İstanbul'a gelişi (1473), Osmanlı'da bilimsel çalışmaların canlanmasında dönüm noktası oldu. Ayasofya Medresesi'nde verdiği derslerle birçok bilim insanı yetiştirdi.
+                        </div>
+                        `
                     },
                     {
-                        text: "Hacca devam et",
+                        text: "Hacca Git - Manevi Yolculuk",
                         nextScene: "hac",
-                        resultText: "Manevi yolculuğunuzu seçtiniz. Bu sizi tatmin etse de bilimsel etkiniz sınırlı kalıyor."
+                        resultText: `
+                        <p>Manevi arayışınız ağır basıyor ve hacca gitmeye karar veriyorsunuz.</p>
+                        
+                        <div class="historical-note">
+                            Tarihte Ali Kuşçu hacca gitmişti ancak döndükten sonra yine bilimsel çalışmalarına devam etti. Bu simülasyonda farklı bir yol seçtiniz.
+                        </div>
+                        `
                     }
                 ]
             },
             istanbul: {
                 title: "İstanbul'un Bilim Işığı",
                 location: "İstanbul - 1473",
-                text: "Fatih Sultan Mehmed'in huzurundasınız. Sahn-ı Seman medreselerinin ders programını yenilemenizi istiyor.",
-                image: "ali-kuscu.png",
+                text: `
+                <p>Fatih Sultan Mehmed sizi Ayasofya Medresesi'ne müderris olarak atıyor. Sahn-ı Seman medreselerinin ders programını yenilemenizi istiyor.</p>
+                
+                <div class="historical-note">
+                    <strong>Tarihi Gerçek:</strong> Ali Kuşçu'nun İstanbul'da başlattığı eğitim reformları, Osmanlı bilim tarihinde çığır açtı. Matematik ve astronomi dersleri medrese müfredatına girdi.
+                </div>
+                `,
+                image: "ali-kuscu-istanbul.png",
                 options: [
                     {
-                        text: "Reform yap",
+                        text: "Eğitim Reformu Yap",
                         nextScene: "reform",
-                        resultText: "Astronomi ve matematiği medrese programına entegre ederek Osmanlı biliminde devrim yapıyorsunuz."
+                        resultText: `
+                        <p>Medrese programına matematik ve astronomi dersleri ekliyorsunuz. Bu reformlar Osmanlı bilim tarihini değiştiriyor.</p>
+                        
+                        <div class="historical-note">
+                            Ali Kuşçu'nun başlattığı bu reformlar sayesinde Takiyüddin gibi bilim insanları yetişti ve 16. yüzyılda İstanbul Rasathanesi kuruldu.
+                        </div>
+                        `
                     },
                     {
-                        text: "Geleneksel kal",
+                        text: "Geleneksel Müfredatı Koru",
                         nextScene: "geleneksel",
-                        resultText: "Sistemi korumayı seçtiniz ancak bu karar Osmanlı'nın bilimsel gelişimini yavaşlatıyor."
+                        resultText: `
+                        <p>Mevcut eğitim sistemini korumayı seçtiniz. Ancak bu karar Osmanlı'nın bilimsel gelişimini yavaşlatıyor.</p>
+                        
+                        <div class="historical-note">
+                            Tarihte Ali Kuşçu reform yapmıştı. Bu simülasyonda farklı bir seçim yaparak tarihin akışını değiştirdiniz.
+                        </div>
+                        `
                     }
                 ]
             }
@@ -233,7 +323,7 @@
             
             document.getElementById("scene-title").textContent = scene.title;
             document.getElementById("location-time").textContent = scene.location;
-            document.getElementById("scene-text").textContent = scene.text;
+            document.getElementById("scene-text").innerHTML = scene.text;
             document.getElementById("character-image").src = `images/${scene.image}`;
             
             const optionsContainer = document.getElementById("options-container");
@@ -246,7 +336,7 @@
                 button.setAttribute("data-option", index);
                 
                 button.addEventListener("click", () => {
-                    document.getElementById("scene-text").textContent = option.resultText;
+                    document.getElementById("scene-text").innerHTML = option.resultText;
                     setTimeout(() => {
                         currentScene = option.nextScene;
                         updateScene();
