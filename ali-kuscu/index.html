@@ -2,8 +2,8 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zamanın Ötesindeki Âlim - Ali Kuşçu Simülasyonu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Türk Yıldızı Birliği - Ali Kuşçu Simülasyonu</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TR:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -13,131 +13,133 @@
             --fildisi: #F8F4E6;
         }
 
-        body {
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
             font-family: 'Noto Serif TR', serif;
             background: url('images/stars-bg.png') center/cover no-repeat fixed,
                        linear-gradient(135deg, #0f2027, #203a43, #2c5364);
             color: var(--fildisi);
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
-            line-height: 1.8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
         .container {
-            width: 90%;
+            width: 100%;
             max-width: 800px;
             background: rgba(10, 10, 30, 0.95);
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
-            border: 3px solid var(--osmanli-altin);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--osmanli-altin);
             overflow: hidden;
-            margin: 2rem auto;
-            position: relative;
+            margin-bottom: 20px;
         }
 
         .header {
             background: linear-gradient(90deg, var(--hatayi-kirmizi), var(--osmanli-altin));
-            padding: 1.5rem;
+            padding: 1.2rem;
             text-align: center;
             border-bottom: 2px solid var(--osmanli-altin);
         }
 
         .scene-title {
-            font-size: 2rem;
+            font-size: clamp(1.4rem, 4vw, 2rem);
             color: white;
-            margin: 0;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            margin-bottom: 0.3rem;
+            text-shadow: 0 2px 3px rgba(0,0,0,0.5);
         }
 
         .location-time {
             font-style: italic;
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
             color: var(--fildisi);
-            margin-top: 0.5rem;
-            font-size: 1.1rem;
         }
 
         .scene-content {
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .character-info {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             background: rgba(20, 20, 40, 0.7);
             border-radius: 10px;
-            padding: 1.5rem;
-            border-left: 4px solid var(--osmanli-altin);
+            padding: 1.2rem;
+            border-left: 3px solid var(--osmanli-altin);
         }
 
         .character-image {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            border: 3px solid var(--osmanli-altin);
+            border: 2px solid var(--osmanli-altin);
             object-fit: cover;
-            margin-right: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .character-desc {
-            flex: 1;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            text-align: center;
         }
 
         .scene-text {
             background: rgba(20, 20, 40, 0.7);
-            padding: 1.5rem;
-            border-radius: 10px;
-            margin-bottom: 2rem;
-            border-left: 4px solid var(--hatayi-kirmizi);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--hatayi-kirmizi);
+            font-size: clamp(0.9rem, 3vw, 1.05rem);
         }
 
         .historical-note {
             background: rgba(212, 175, 55, 0.15);
-            border-left: 4px solid var(--osmanli-altin);
-            padding: 1rem;
-            margin: 1.5rem 0;
+            border-left: 3px solid var(--osmanli-altin);
+            padding: 0.8rem;
+            margin: 1rem 0;
             border-radius: 5px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .options-container {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1rem;
+            gap: 0.8rem;
         }
 
         .option-btn {
             background: linear-gradient(135deg, var(--koyu-lacivert), var(--hatayi-kirmizi));
             color: white;
             border: none;
-            padding: 1.2rem;
-            border-radius: 8px;
+            padding: 1rem;
+            border-radius: 7px;
             font-family: 'Noto Serif TR', serif;
-            font-size: 1.1rem;
+            font-size: clamp(0.95rem, 3vw, 1.05rem);
             cursor: pointer;
-            transition: all 0.3s;
+            transition: transform 0.2s;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-
-        .option-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+            box-shadow: 0 3px 5px rgba(0,0,0,0.3);
         }
 
         .option-btn:active {
-            transform: translateY(1px);
+            transform: translateY(2px);
         }
 
         .footer {
             text-align: center;
-            padding: 1.5rem;
-            font-size: 0.9rem;
+            padding: 1rem;
+            font-size: 0.8rem;
             color: rgba(248, 244, 230, 0.7);
             border-top: 1px solid rgba(212, 175, 55, 0.3);
         }
@@ -149,120 +151,102 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0,0,0,0.96);
             z-index: 1000;
             display: none;
             justify-content: center;
             align-items: center;
-            color: white;
-            padding: 2rem;
+            padding: 15px;
             box-sizing: border-box;
+            overflow-y: auto;
         }
 
         .ending-content {
+            width: 100%;
             max-width: 800px;
             background: linear-gradient(135deg, #1A237E, #0f2027);
-            padding: 2rem;
-            border-radius: 15px;
+            padding: 1.5rem;
+            border-radius: 12px;
             border: 2px solid #D4AF37;
             text-align: center;
+            margin: 20px 0;
         }
 
         .ending-title {
-            font-size: 2rem;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
             color: #D4AF37;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .ending-location {
             font-style: italic;
-            margin-bottom: 1.5rem;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            margin-bottom: 1.2rem;
         }
 
         .ending-image {
-            width: 300px;
-            max-width: 100%;
-            border-radius: 10px;
-            margin: 1rem 0;
-            border: 3px solid #F8F4E6;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            margin: 0.8rem 0;
+            border: 2px solid #F8F4E6;
         }
 
         .legacy-list {
             text-align: left;
-            margin: 1.5rem auto;
+            margin: 1.2rem auto;
             max-width: 500px;
             list-style-type: none;
             padding: 0;
         }
 
         .legacy-list li {
-            margin: 1rem 0;
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
+            margin: 0.8rem 0;
+            font-size: clamp(0.9rem, 3vw, 1rem);
+            padding-left: 1.2rem;
+            position: relative;
         }
 
         .legacy-list li::before {
             content: "•";
             color: #D4AF37;
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
-
-        .final-question {
-            margin-top: 2rem;
-            font-style: italic;
-            font-size: 1.2rem;
-            color: #D4AF37;
+            position: absolute;
+            left: 0;
         }
 
         .restart-btn {
             background: linear-gradient(135deg, #D4AF37, #F39C12);
             color: #000;
             border: none;
-            padding: 1rem 2rem;
-            margin-top: 1.5rem;
-            border-radius: 8px;
+            padding: 0.8rem 1.5rem;
+            margin-top: 1.2rem;
+            border-radius: 7px;
             font-family: 'Noto Serif TR', serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: transform 0.2s;
         }
 
-        .restart-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+        .restart-btn:active {
+            transform: translateY(2px);
         }
 
-        @media (max-width: 768px) {
-            .container {
-                width: 95%;
-                margin: 1rem auto;
-            }
-            
+        /* Tablet ve büyük ekranlar */
+        @media (min-width: 768px) {
             .character-info {
-                flex-direction: column;
-                text-align: center;
+                flex-direction: row;
+                text-align: left;
             }
             
             .character-image {
-                margin-right: 0;
-                margin-bottom: 1rem;
+                margin-right: 1.2rem;
+                margin-bottom: 0;
+                width: 120px;
+                height: 120px;
             }
             
-            .scene-title {
-                font-size: 1.6rem;
-            }
-
-            .ending-content {
-                width: 95%;
-                padding: 1.5rem;
-            }
-
-            .ending-image {
-                width: 200px;
+            .character-desc {
+                text-align: left;
             }
         }
     </style>
@@ -278,15 +262,15 @@
             <div class="character-info">
                 <img src="images/ali-kuscu.png" alt="Ali Kuşçu" class="character-image" id="character-image">
                 <div class="character-desc">
-                    <p><strong>Ali Kuşçu (1403-1474):</strong> Türk-İslam dünyasının yetiştirdiği en önemli astronom ve matematikçilerden. Semerkand'da doğdu, Uluğ Bey'in öğrencisi oldu. Osmanlı'da astronomi ve matematik eğitiminin temellerini attı.</p>
+                    <p><strong>Ali Kuşçu (1403-1474):</strong> Türk-İslam dünyasının en önemli astronom ve matematikçilerinden. Semerkand'da doğdu, Osmanlı'da bilim eğitiminin temellerini attı.</p>
                 </div>
             </div>
             
             <div class="scene-text" id="scene-text">
-                <p>15. yüzyıl Semerkand'ında, Uluğ Bey'in kurduğu rasathanede gökyüzünü inceliyorsunuz. Timur İmparatorluğu'nun bilim merkezinde, dönemin en ileri astronomi çalışmalarına katılıyorsunuz.</p>
+                <p>15. yüzyıl Semerkand'ında, Uluğ Bey'in rasathanesinde gökyüzünü inceliyorsunuz. Dönemin en ileri astronomi çalışmalarına katılıyorsunuz.</p>
                 
                 <div class="historical-note">
-                    <strong>Did you know?</strong> Semerkand'daki rasathane, o dönem dünyanın en gelişmiş gözlemeviydi. Uluğ Bey'in hazırlattığı "Zeyç Kürkani" adlı yıldız kataloğu, 400 yıl boyunca kullanıldı.
+                    <strong>Biliyor muydunuz?</strong> Semerkand'daki rasathane, o dönem dünyanın en gelişmiş gözlemeviydi.
                 </div>
             </div>
             
@@ -297,7 +281,7 @@
         </div>
         
         <div class="footer">
-            Türk Yıldızı Birliği - Bilim Tarihimizin Yıldızlarını Keşfedin
+            Türk Yıldızı Birliği - Bilim Mirasımızı Yaşatıyoruz
         </div>
     </div>
 
@@ -319,13 +303,7 @@
                     <li>Osmanlı medrese sisteminde devrim yaptı</li>
                 </ul>
                 
-                <div class="historical-note">
-                    "Sen olsaydın hangi kararı farklı verirdin? Tarihin akışını değiştirebilir miydin?"
-                </div>
-                
-                <div class="final-question">
-                    <button class="restart-btn" onclick="restartSimulation()">Simülasyonu Yeniden Oyna</button>
-                </div>
+                <button class="restart-btn" onclick="restartSimulation()">Simülasyonu Yeniden Başlat</button>
             </div>
         </div>
     </div>
@@ -336,7 +314,7 @@
                 title: "Ali Kuşçu'nun Yolculuğu",
                 location: "Semerkand - 1425",
                 text: `
-                <p>Uluğ Bey'in rasathanesinde çalışıyorsunuz. Dönemin en gelişmiş astronomi aletleriyle yıldızları inceliyorsunuz. Ancak daha fazlasını öğrenme arzusu sizi rahat bırakmıyor.</p>
+                <p>Uluğ Bey'in rasathanesinde çalışıyorsunuz. Dönemin en gelişmiş astronomi aletleriyle yıldızları inceliyorsunuz.</p>
                 
                 <div class="historical-note">
                     <strong>Kirman Neresi?</strong> İran'ın güneydoğusunda önemli bir bilim merkezi. Dönemin ünlü bilginleri burada ders verirdi.
@@ -348,10 +326,10 @@
                         text: "Kirman'a Git - Bilim Peşinde",
                         nextScene: "kirman",
                         resultText: `
-                        <p>Kirman'a giderek dönemin ünlü bilginlerinden ders alıyorsunuz. Burada Ay'ın evreleri üzerine çığır açıcı çalışmalar yapıyorsunuz.</p>
+                        <p>Kirman'a giderek dönemin ünlü bilginlerinden ders alıyorsunuz. Ay'ın evreleri üzerine çığır açıcı çalışmalar yapıyorsunuz.</p>
                         
                         <div class="historical-note">
-                            Ali Kuşçu'nun Kirman'da yazdığı "Risale fi'l-Hey'e" adlı astronomi eseri, Osmanlı medreselerinde ders kitabı olarak okutuldu.
+                            Ali Kuşçu'nun Kirman'da yazdığı "Risale fi'l-Hey'e" adlı eser, Osmanlı medreselerinde ders kitabı olarak okutuldu.
                         </div>
                         `
                     },
@@ -362,7 +340,7 @@
                         <p>Semerkand'da kalmayı seçtiniz. Uluğ Bey'in yönetimindeki rasathanede çalışmalarınıza devam ediyorsunuz.</p>
                         
                         <div class="historical-note">
-                            Uluğ Bey'in rasathanesi 1449'da yıkıldı. Eğer tarihte Ali Kuşçu Kirman'a gitmeseydi, Osmanlı bilim tarihi çok farklı gelişebilirdi.
+                            Uluğ Bey'in rasathanesi 1449'da yıkıldı. Bu olay bilim tarihi için büyük bir kayıptı.
                         </div>
                         `
                     }
@@ -375,7 +353,7 @@
                 <p>Kirman'da 10 yıl geçirdiniz. Artık dönemin saygın bilginlerindensiniz. Akkoyunlu hükümdarı Uzun Hasan sizi özel olarak çağırıyor.</p>
                 
                 <div class="historical-note">
-                    <strong>Tarihi An:</strong> Osmanlı ile Akkoyunlular arasında diplomatik ilişkiler gerilimli. Bilim insanları bu dönemde iki devlet arasında köprü görevi görüyordu.
+                    <strong>Tarihi An:</strong> Osmanlı ile Akkoyunlular arasında diplomatik ilişkiler gerilimli. Bilim insanları iki devlet arasında köprü görevi görüyordu.
                 </div>
                 `,
                 image: "ali-kuscu-kirman.png",
@@ -387,9 +365,10 @@
                         <p>Uzun Hasan'ın elçisi olarak İstanbul'a gidiyorsunuz. Fatih Sultan Mehmed sizi büyük bir saygıyla karşılıyor.</p>
                         
                         <div class="historical-note">
-                            Ali Kuşçu'nun İstanbul'a gelişi (1473), Osmanlı'da bilimsel çalışmaların canlanmasında dönüm noktası oldu. Ayasofya Medresesi'nde verdiği derslerle birçok bilim insanı yetiştirdi.
+                            Ali Kuşçu'nun İstanbul'a gelişi (1473), Osmanlı'da bilimsel çalışmaların canlanmasında dönüm noktası oldu.
                         </div>
-                        `
+                        `,
+                        showEnding: true
                     },
                     {
                         text: "Hacca Git - Manevi Yolculuk",
@@ -398,82 +377,7 @@
                         <p>Manevi arayışınız ağır basıyor ve hacca gitmeye karar veriyorsunuz.</p>
                         
                         <div class="historical-note">
-                            Tarihte Ali Kuşçu hacca gitmişti ancak döndükten sonra yine bilimsel çalışmalarına devam etti. Bu simülasyonda farklı bir yol seçtiniz.
-                        </div>
-                        `
-                    }
-                ]
-            },
-            istanbul: {
-                title: "İstanbul'un Bilim Işığı",
-                location: "İstanbul - 1473",
-                text: `
-                <p>Fatih Sultan Mehmed sizi Ayasofya Medresesi'ne müderris olarak atıyor. Sahn-ı Seman medreselerinin ders programını yenilemenizi istiyor.</p>
-                
-                <div class="historical-note">
-                    <strong>Tarihi Gerçek:</strong> Ali Kuşçu'nun İstanbul'da başlattığı eğitim reformları, Osmanlı bilim tarihinde çığır açtı. Matematik ve astronomi dersleri medrese müfredatına girdi.
-                </div>
-                `,
-                image: "ali-kuscu-istanbul.png",
-                options: [
-                    {
-                        text: "Eğitim Reformu Yap",
-                        nextScene: "reform",
-                        resultText: `
-                        <p>Medrese programına matematik ve astronomi dersleri ekliyorsunuz. Bu reformlar Osmanlı bilim tarihini değiştiriyor.</p>
-                        
-                        <div class="historical-note">
-                            Ali Kuşçu'nun başlattığı bu reformlar sayesinde Takiyüddin gibi bilim insanları yetişti ve 16. yüzyılda İstanbul Rasathanesi kuruldu.
-                        </div>
-                        `,
-                        showEnding: true
-                    },
-                    {
-                        text: "Geleneksel Müfredatı Koru",
-                        nextScene: "geleneksel",
-                        resultText: `
-                        <p>Mevcut eğitim sistemini korumayı seçtiniz. Ancak bu karar Osmanlı'nın bilimsel gelişimini yavaşlatıyor.</p>
-                        
-                        <div class="historical-note">
-                            Tarihte Ali Kuşçu reform yapmıştı. Bu simülasyonda farklı bir seçim yaparak tarihin akışını değiştirdiniz.
-                        </div>
-                        `,
-                        showEnding: true
-                    }
-                ]
-            },
-            hac: {
-                title: "Manevi Yolculuk",
-                location: "Mekke - 1440",
-                text: `
-                <p>Hac yolculuğunuz sırasında birçok bilginle tanışıyorsunuz. Ancak Semerkand'daki rasathanenin yıkıldığı haberini alıyorsunuz.</p>
-                
-                <div class="historical-note">
-                    <strong>Tarihi Not:</strong> Uluğ Bey 1449'da öldürüldü ve rasathanesi yıkıldı. Ali Kuşçu tarihte bu olaydan sonra Tebriz'e gitmişti.
-                </div>
-                `,
-                image: "ali-kuscu-hac.png",
-                options: [
-                    {
-                        text: "Tebriz'e Git - Yeni Bir Başlangıç",
-                        nextScene: "tebriz",
-                        resultText: `
-                        <p>Tebriz'de Akkoyunlu sarayına sığınıyorsunuz. Burada yeni eserler yazmaya başlıyorsunuz.</p>
-                        
-                        <div class="historical-note">
-                            Tarihte Ali Kuşçu, Uzun Hasan'ın elçisi olarak İstanbul'a gitmeden önce Tebriz'de yaşadı.
-                        </div>
-                        `,
-                        showEnding: true
-                    },
-                    {
-                        text: "Semerkand'a Dön - Yıkıntıları Gör",
-                        nextScene: "semerkand-donus",
-                        resultText: `
-                        <p>Semerkand'a döndüğünüzde rasathanenin yıkıntılarını görüyorsunuz. Bilimsel çalışmaların ne kadar kırılgan olduğunu anlıyorsunuz.</p>
-                        
-                        <div class="historical-note">
-                            Bu simülasyonda farklı bir yol seçtiniz. Tarihte Ali Kuşçu Semerkand'a dönmemişti.
+                            Tarihte Ali Kuşçu hacca gitmişti ancak döndükten sonra yine bilimsel çalışmalarına devam etti.
                         </div>
                         `,
                         showEnding: true
@@ -505,7 +409,6 @@
                 button.setAttribute("data-option", index);
                 
                 button.addEventListener("click", () => {
-                    // Kararı kaydet
                     gameState.decisions.push({
                         scene: gameState.currentScene,
                         choice: option.text,
@@ -520,27 +423,30 @@
                         } else {
                             gameState.currentScene = option.nextScene;
                             updateScene();
+                            window.scrollTo(0, 0);
                         }
-                    }, 1500);
+                    }, 1000);
                 });
                 
                 optionsContainer.appendChild(button);
             });
+            
+            window.scrollTo(0, 0);
         }
 
         function showEnding() {
             const endingContainer = document.getElementById("ending");
             const endingText = endingContainer.querySelector(".ending-text");
             
-            // Kararları listele
             let decisionsHtml = `<h3>Verdiğiniz Tarihi Kararlar:</h3><ul class="legacy-list">`;
-            gameState.decisions.forEach((decision, index) => {
+            gameState.decisions.forEach(decision => {
                 decisionsHtml += `<li>${decision.location}: <strong>${decision.choice}</strong></li>`;
             });
             decisionsHtml += `</ul><p>Bu kararlarla şekillenen bir tarih yazdınız!</p>`;
             
             endingText.innerHTML += decisionsHtml;
             endingContainer.style.display = "flex";
+            window.scrollTo(0, 0);
         }
 
         function restartSimulation() {
@@ -552,6 +458,11 @@
 
         // Sayfa yüklendiğinde ilk sahneyi yükle
         document.addEventListener("DOMContentLoaded", updateScene);
+        
+        // Mobil cihazlar için ek ayar
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+            document.querySelector('meta[name="viewport"]').content = "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no";
+        }
     </script>
 </body>
 </html>
