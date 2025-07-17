@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Türk Yıldızı Birliği - Ali Kuşçu'nun Yolculuğu</title>
+    <title>Zamanın Ötesindeki Âlim - Ali Kuşçu Simülasyonu</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TR:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -44,11 +44,6 @@
             padding: 1.5rem;
             text-align: center;
             border-bottom: 2px solid var(--osmanli-altin);
-        }
-
-        .logo {
-            max-width: 150px;
-            margin-bottom: 1rem;
         }
 
         .scene-title {
@@ -147,6 +142,100 @@
             border-top: 1px solid rgba(212, 175, 55, 0.3);
         }
 
+        /* Son Sahne Stilleri */
+        .ending-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .ending-content {
+            max-width: 800px;
+            background: linear-gradient(135deg, #1A237E, #0f2027);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #D4AF37;
+            text-align: center;
+        }
+
+        .ending-title {
+            font-size: 2rem;
+            color: #D4AF37;
+            margin-bottom: 1rem;
+        }
+
+        .ending-location {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .ending-image {
+            width: 300px;
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 3px solid #F8F4E6;
+        }
+
+        .legacy-list {
+            text-align: left;
+            margin: 1.5rem auto;
+            max-width: 500px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .legacy-list li {
+            margin: 1rem 0;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .legacy-list li::before {
+            content: "•";
+            color: #D4AF37;
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+
+        .final-question {
+            margin-top: 2rem;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #D4AF37;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #D4AF37, #F39C12);
+            color: #000;
+            border: none;
+            padding: 1rem 2rem;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Noto Serif TR', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .restart-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 10px rgba(0,0,0,0.4);
+        }
+
         @media (max-width: 768px) {
             .container {
                 width: 95%;
@@ -166,13 +255,21 @@
             .scene-title {
                 font-size: 1.6rem;
             }
+
+            .ending-content {
+                width: 95%;
+                padding: 1.5rem;
+            }
+
+            .ending-image {
+                width: 200px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <img src="images/tyb-logo.png" alt="Türk Yıldızı Birliği" class="logo">
             <h1 class="scene-title" id="scene-title">Ali Kuşçu'nun Yolculuğu</h1>
             <div class="location-time" id="location-time">Semerkand - 15. Yüzyıl</div>
         </div>
@@ -201,6 +298,35 @@
         
         <div class="footer">
             Türk Yıldızı Birliği - Bilim Tarihimizin Yıldızlarını Keşfedin
+        </div>
+    </div>
+
+    <!-- Son Sahne -->
+    <div class="ending-container" id="ending">
+        <div class="ending-content">
+            <h2 class="ending-title">Eyüp Sultan'da Sessiz Bir Veda</h2>
+            <div class="ending-location">İstanbul - 1474</div>
+            
+            <img src="images/ali-kuscu-turbesi.jpg" alt="Ali Kuşçu Türbesi" class="ending-image">
+            
+            <div class="ending-text">
+                <p>Ali Kuşçu, Eyüp Sultan Türbesi'nin gölgesinde ebedi istirahatine çekildi. Arkasında:</p>
+                
+                <ul class="legacy-list">
+                    <li>14 bilimsel eser bıraktı</li>
+                    <li>3 astronomi risalesi yazdı</li>
+                    <li>Matematikte yeni hesaplama yöntemleri geliştirdi</li>
+                    <li>Osmanlı medrese sisteminde devrim yaptı</li>
+                </ul>
+                
+                <div class="historical-note">
+                    "Sen olsaydın hangi kararı farklı verirdin? Tarihin akışını değiştirebilir miydin?"
+                </div>
+                
+                <div class="final-question">
+                    <button class="restart-btn" onclick="restartSimulation()">Simülasyonu Yeniden Oyna</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -299,7 +425,8 @@
                         <div class="historical-note">
                             Ali Kuşçu'nun başlattığı bu reformlar sayesinde Takiyüddin gibi bilim insanları yetişti ve 16. yüzyılda İstanbul Rasathanesi kuruldu.
                         </div>
-                        `
+                        `,
+                        showEnding: true
                     },
                     {
                         text: "Geleneksel Müfredatı Koru",
@@ -310,16 +437,58 @@
                         <div class="historical-note">
                             Tarihte Ali Kuşçu reform yapmıştı. Bu simülasyonda farklı bir seçim yaparak tarihin akışını değiştirdiniz.
                         </div>
-                        `
+                        `,
+                        showEnding: true
+                    }
+                ]
+            },
+            hac: {
+                title: "Manevi Yolculuk",
+                location: "Mekke - 1440",
+                text: `
+                <p>Hac yolculuğunuz sırasında birçok bilginle tanışıyorsunuz. Ancak Semerkand'daki rasathanenin yıkıldığı haberini alıyorsunuz.</p>
+                
+                <div class="historical-note">
+                    <strong>Tarihi Not:</strong> Uluğ Bey 1449'da öldürüldü ve rasathanesi yıkıldı. Ali Kuşçu tarihte bu olaydan sonra Tebriz'e gitmişti.
+                </div>
+                `,
+                image: "ali-kuscu-hac.png",
+                options: [
+                    {
+                        text: "Tebriz'e Git - Yeni Bir Başlangıç",
+                        nextScene: "tebriz",
+                        resultText: `
+                        <p>Tebriz'de Akkoyunlu sarayına sığınıyorsunuz. Burada yeni eserler yazmaya başlıyorsunuz.</p>
+                        
+                        <div class="historical-note">
+                            Tarihte Ali Kuşçu, Uzun Hasan'ın elçisi olarak İstanbul'a gitmeden önce Tebriz'de yaşadı.
+                        </div>
+                        `,
+                        showEnding: true
+                    },
+                    {
+                        text: "Semerkand'a Dön - Yıkıntıları Gör",
+                        nextScene: "semerkand-donus",
+                        resultText: `
+                        <p>Semerkand'a döndüğünüzde rasathanenin yıkıntılarını görüyorsunuz. Bilimsel çalışmaların ne kadar kırılgan olduğunu anlıyorsunuz.</p>
+                        
+                        <div class="historical-note">
+                            Bu simülasyonda farklı bir yol seçtiniz. Tarihte Ali Kuşçu Semerkand'a dönmemişti.
+                        </div>
+                        `,
+                        showEnding: true
                     }
                 ]
             }
         };
 
-        let currentScene = "start";
+        const gameState = {
+            currentScene: "start",
+            decisions: []
+        };
 
         function updateScene() {
-            const scene = scenes[currentScene];
+            const scene = scenes[gameState.currentScene];
             
             document.getElementById("scene-title").textContent = scene.title;
             document.getElementById("location-time").textContent = scene.location;
@@ -336,10 +505,22 @@
                 button.setAttribute("data-option", index);
                 
                 button.addEventListener("click", () => {
+                    // Kararı kaydet
+                    gameState.decisions.push({
+                        scene: gameState.currentScene,
+                        choice: option.text,
+                        location: scene.location
+                    });
+                    
                     document.getElementById("scene-text").innerHTML = option.resultText;
+                    
                     setTimeout(() => {
-                        currentScene = option.nextScene;
-                        updateScene();
+                        if (option.showEnding) {
+                            showEnding();
+                        } else {
+                            gameState.currentScene = option.nextScene;
+                            updateScene();
+                        }
                     }, 1500);
                 });
                 
@@ -347,6 +528,29 @@
             });
         }
 
+        function showEnding() {
+            const endingContainer = document.getElementById("ending");
+            const endingText = endingContainer.querySelector(".ending-text");
+            
+            // Kararları listele
+            let decisionsHtml = `<h3>Verdiğiniz Tarihi Kararlar:</h3><ul class="legacy-list">`;
+            gameState.decisions.forEach((decision, index) => {
+                decisionsHtml += `<li>${decision.location}: <strong>${decision.choice}</strong></li>`;
+            });
+            decisionsHtml += `</ul><p>Bu kararlarla şekillenen bir tarih yazdınız!</p>`;
+            
+            endingText.innerHTML += decisionsHtml;
+            endingContainer.style.display = "flex";
+        }
+
+        function restartSimulation() {
+            document.getElementById("ending").style.display = "none";
+            gameState.currentScene = "start";
+            gameState.decisions = [];
+            updateScene();
+        }
+
+        // Sayfa yüklendiğinde ilk sahneyi yükle
         document.addEventListener("DOMContentLoaded", updateScene);
     </script>
 </body>
