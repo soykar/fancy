@@ -1,111 +1,263 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Ali Kuşçu Simülasyonu</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Georgia', serif;
-      background: url('images/stars-bg.png') center/cover no-repeat fixed;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-    .container {
-      background: rgba(0,0,0,0.8);
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 600px;
-      width: 100%;
-    }
-    button {
-      display: block;
-      width: 100%;
-      padding: 15px;
-      margin: 10px 0;
-      background: #f39c12;
-      border: none;
-      border-radius: 5px;
-      font-size: 18px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zamanın Ötesindeki Âlim - Ali Kuşçu Simülasyonu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TR:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --osmanli-altin: #D4AF37;
+            --koyu-lacivert: #1A237E;
+            --hatayi-kirmizi: #C21807;
+            --fildisi: #F8F4E6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Serif TR', serif;
+            background: url('images/stars-bg.png') center/cover no-repeat fixed,
+                       linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: var(--fildisi);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: rgba(10, 10, 30, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--osmanli-altin);
+            overflow: hidden;
+            position: relative;
+            margin: 2rem auto;
+        }
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--hatayi-kirmizi), var(--osmanli-altin), var(--koyu-lacivert));
+        }
+
+        .scene-header {
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .scene-title {
+            font-size: 2rem;
+            color: var(--osmanli-altin);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .location-time {
+            font-style: italic;
+            color: var(--osmanli-altin);
+            font-size: 1.1rem;
+        }
+
+        .scene-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .character-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid var(--osmanli-altin);
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .scene-text {
+            background: rgba(20, 20, 40, 0.7);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--hatayi-kirmizi);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .options-container {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            background: linear-gradient(135deg, var(--koyu-lacivert), var(--hatayi-kirmizi));
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Noto Serif TR', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        }
+
+        .option-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.3);
+        }
+
+        .option-btn:active {
+            transform: translateY(1px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                margin: 1rem auto;
+            }
+            
+            .scene-title {
+                font-size: 1.6rem;
+            }
+            
+            .character-image {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .scene-text {
+                padding: 1rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container" id="scene">
-    <h1 id="title">Ali Kuşçu'nun Yolu</h1>
-    <p id="text">Semerkand'da gökyüzünü inceliyorsunuz...</p>
-    <div id="options">
-      <!-- Butonlar otomatik oluşturulacak -->
+    <div class="container">
+        <div class="scene-header">
+            <h1 class="scene-title" id="scene-title">Zamanın Ötesindeki Âlim</h1>
+            <div class="location-time" id="location-time">Semerkand - 1449</div>
+        </div>
+        
+        <div class="scene-content">
+            <img src="images/ali-kuscu.png" alt="Ali Kuşçu" class="character-image" id="character-image">
+            
+            <div class="scene-text" id="scene-text">
+                Semerkand'ın yıldızlarla örülü gecelerinde gökyüzünü izleyen bir gençsiniz. Kadızâde Rûmî'nin rehberliğinde hesaplamalarınız ve gözlem yeteneğinizle tanınıyorsunuz.
+            </div>
+            
+            <div class="options-container" id="options-container">
+                <button class="option-btn" data-option="0">Kirman'a git</button>
+                <button class="option-btn" data-option="1">Semerkand'da kal</button>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    const scenes = {
-      start: {
-        title: "Karar Zamanı",
-        text: "Semerkand'da gökyüzünü inceliyorsunuz...",
-        options: [
-          { 
-            text: "Kirman'a git", 
-            next: "kirman",
-            resultText: "Kirman'a giderek bilimin izini sürüyorsunuz..."
-          },
-          { 
-            text: "Semerkand'da kal", 
-            next: "semerkand",
-            resultText: "Geleneksel eğitimle yetiniyorsunuz..."
-          }
-        ]
-      },
-      kirman: {
-        title: "Kirman Yolculuğu",
-        text: "Kirman'da Ay'ın evrelerini inceliyorsunuz...",
-        options: [
-          { 
-            text: "Elçiliği kabul et", 
-            next: "istanbul",
-            resultText: "Osmanlı'ya elçi olarak gidiyorsunuz..."
-          },
-          { 
-            text: "Hacca git", 
-            next: "hac",
-            resultText: "Manevi yolculuğa çıkıyorsunuz..."
-          }
-        ]
-      }
-    };
-
-    let currentScene = "start";
-
-    function updateScene() {
-      const scene = scenes[currentScene];
-      document.getElementById("title").textContent = scene.title;
-      document.getElementById("text").textContent = scene.text;
-      
-      const optionsDiv = document.getElementById("options");
-      optionsDiv.innerHTML = ""; // Önceki butonları temizle
-      
-      scene.options.forEach((option, index) => {
-        const button = document.createElement("button");
-        button.textContent = option.text;
-        button.onclick = () => {
-          document.getElementById("text").textContent = option.resultText;
-          setTimeout(() => {
-            currentScene = option.next;
-            updateScene();
-          }, 1000);
+    <script>
+        const scenes = {
+            start: {
+                title: "Gökyüzüne Yazılmış Bir Kader",
+                location: "Semerkand - 1449",
+                text: "Semerkand'ın yıldızlarla örülü gecelerinde gökyüzünü izleyen bir gençsiniz. Kadızâde Rûmî'nin rehberliğinde hesaplamalarınız ve gözlem yeteneğinizle tanınıyorsunuz. Ancak içinizde sınırların ötesini görme arzusu var...",
+                image: "ali-kuscu.png",
+                options: [
+                    {
+                        text: "Kirman'a git",
+                        nextScene: "kirman",
+                        resultText: "Kirman'a giderek Ay'ın evrelerini incelemeye ve yeni eserler kaleme almaya karar verdiniz. Bu cesur adım bilimsel yeteneklerinizi geliştiriyor."
+                    },
+                    {
+                        text: "Semerkand'da kal",
+                        nextScene: "semerkand",
+                        resultText: "Geleneksel eğitiminizle yetinmeyi seçtiniz. Bu güvenli karar, bilimsel gelişiminizi yavaşlatıyor."
+                    }
+                ]
+            },
+            kirman: {
+                title: "Bilime Ulaşmanın Gizli Yolu",
+                location: "Kirman - 1450",
+                text: "Kirman'da geçirdiğiniz sürede Ay'ın evreleri üzerine çığır açıcı çalışmalar yapıyorsunuz. Ancak şimdi yeni bir karşısınız... Akkoyunlu lideri Uzun Hasan size Osmanlı'ya elçi olmayı teklif ediyor.",
+                image: "ali-kuscu.png",
+                options: [
+                    {
+                        text: "Elçiliği kabul et",
+                        nextScene: "istanbul",
+                        resultText: "Uzun Hasan'ın teklifini kabul ederek Osmanlı'ya elçi olarak gidiyorsunuz. Bu karar bilim tarihini değiştirecek."
+                    },
+                    {
+                        text: "Hacca devam et",
+                        nextScene: "hac",
+                        resultText: "Manevi yolculuğunuzu seçtiniz. Bu sizi tatmin etse de bilimsel etkiniz sınırlı kalıyor."
+                    }
+                ]
+            },
+            istanbul: {
+                title: "İstanbul'un Bilim Işığı",
+                location: "İstanbul - 1473",
+                text: "Fatih Sultan Mehmed'in huzurundasınız. Sahn-ı Seman medreselerinin ders programını yenilemenizi istiyor.",
+                image: "ali-kuscu.png",
+                options: [
+                    {
+                        text: "Reform yap",
+                        nextScene: "reform",
+                        resultText: "Astronomi ve matematiği medrese programına entegre ederek Osmanlı biliminde devrim yapıyorsunuz."
+                    },
+                    {
+                        text: "Geleneksel kal",
+                        nextScene: "geleneksel",
+                        resultText: "Sistemi korumayı seçtiniz ancak bu karar Osmanlı'nın bilimsel gelişimini yavaşlatıyor."
+                    }
+                ]
+            }
         };
-        optionsDiv.appendChild(button);
-      });
-    }
 
-    // İlk sahneyi yükle
-    updateScene();
-  </script>
+        let currentScene = "start";
+
+        function updateScene() {
+            const scene = scenes[currentScene];
+            
+            document.getElementById("scene-title").textContent = scene.title;
+            document.getElementById("location-time").textContent = scene.location;
+            document.getElementById("scene-text").textContent = scene.text;
+            document.getElementById("character-image").src = `images/${scene.image}`;
+            
+            const optionsContainer = document.getElementById("options-container");
+            optionsContainer.innerHTML = "";
+            
+            scene.options.forEach((option, index) => {
+                const button = document.createElement("button");
+                button.className = "option-btn";
+                button.textContent = option.text;
+                button.setAttribute("data-option", index);
+                
+                button.addEventListener("click", () => {
+                    document.getElementById("scene-text").textContent = option.resultText;
+                    setTimeout(() => {
+                        currentScene = option.nextScene;
+                        updateScene();
+                    }, 1500);
+                });
+                
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", updateScene);
+    </script>
 </body>
 </html>
