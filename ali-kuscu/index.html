@@ -5,6 +5,62 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Ali Kuşçu Simülasyonu</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      max-width: 90%;
+      width: 400px;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 10px;
+      color: #f9e79f;
+    }
+
+    p {
+      margin: 15px 0;
+      font-size: 1.1em;
+    }
+
+    .character {
+      width: 200px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background-color: #f39c12;
+      border: none;
+      color: #000;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #d68910;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -12,12 +68,12 @@
     <img src="images/ali-kuscu.png" alt="Ali Kuşçu" class="character" />
     
     <audio id="voice" src="audio/hosgeldin.mp3" preload="auto"></audio>
-    <button id="sesAcBtn">Ses Aç</button>
+    <button id="sesAcBtn">🔊 Hoş Geldin Sesini Aç</button>
 
     <p>Ben Ali Kuşçu. Bilimin ışığında yürürken seni bir karar bekliyor...</p>
 
-    <button onclick="choose('a')">Semerkand’a git</button>
-    <button onclick="choose('b')">İstanbul’da kal</button>
+    <button onclick="choose('Semerkand')">📜 Semerkand’a git</button>
+    <button onclick="choose('İstanbul')">🏰 İstanbul’da kal</button>
   </div>
 
   <script>
@@ -29,8 +85,8 @@
     });
 
     function choose(option) {
-      alert("Seçiminiz: " + option);
-      // Senaryo genişletilebilir
+      alert("Seçiminiz: " + option + "\nYeni bir yolculuk başlıyor...");
+      // Genişletilebilir alan
     }
   </script>
 </body>
